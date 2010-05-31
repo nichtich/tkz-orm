@@ -1,0 +1,238 @@
+%<–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––>
+%
+% Copyright 2010 by Jakob Voss
+% 
+% This file is based on works by Till Tantau. It contains additions and/or
+% modifications by Jakob Voss and Rouben Rostamian. It may be distributed
+% and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Free Documentation License.
+%
+% See the file LICENSE for more details.
+
+%<–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––>
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{pgfmanualstyle}[2010/01/24 v0.1 pgfmanualstyle]
+\RequirePackage{tikz}[2009/09/04]
+
+%<–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––>
+% code from pgfmanual-en-macros.tex
+%<–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––>
+\definecolor{graphicbackground}{rgb}{0.96,0.96,0.8}
+\definecolor{codebackground}{rgb}{0.8,0.8,1}
+
+\makeatletter
+
+\begingroup
+\catcode`|=0
+\catcode`[= 1
+\catcode`]=2
+\catcode`\{=12
+\catcode `\}=12
+\catcode`\\=12 |gdef|find@example#1\end{codeexample}[|endofcodeexample[#1]]
+|endgroup
+% 
+\begingroup
+\catcode`\^=7
+\catcode`\^^M=13
+\catcode`\ =13%
+\gdef\returntospace{\catcode`\ =13\def {\space}\catcode`\^^M=13\def^^M{}}%
+\endgroup
+% 
+\begingroup
+\catcode`\%=13
+\catcode`\^^M=13
+\gdef\commenthandler{\catcode`\%=13\def%{\@gobble@till@return}}
+\gdef\@gobble@till@return#1^^M{}
+\gdef\typesetcomment{\catcode`\%=13\def%{\@typeset@till@return}}
+\gdef\@typeset@till@return#1^^M{{\def%{\char`\%}\textsl{\char`\%#1}}\par}
+\endgroup
+% 
+\define@key{codeexample}{width}{\setlength\codeexamplewidth{#1}}
+\define@key{codeexample}{graphic}{\colorlet{graphicbackground}{#1}}
+\define@key{codeexample}{code}{\colorlet{codebackground}{#1}}
+\define@key{codeexample}{execute code}{\csname code@execute#1\endcsname}
+\define@key{codeexample}{code only}[]{\code@executefalse}
+\define@key{codeexample}{pre}{\def\code@pre{#1}}
+\define@key{codeexample}{post}{\def\code@post{#1}}
+% 
+\def\code@pre{}
+\def\code@post{}
+% 
+\newdimen\finalcodeexamplewidth % XXX
+\newdimen\codeexamplewidth
+\newif\ifcode@execute
+\newbox\codeexamplebox
+\def\codeexample[#1]{%
+  \code@executetrue
+  \setlength\codeexamplewidth{4cm}%
+  \addtolength\codeexamplewidth{7pt}%
+  \setkeys{codeexample}{#1}%
+  \parindent0pt
+  \begingroup%
+  \par%
+  \medskip%
+  \let\do\@makeother%
+  \dospecials%
+  \obeylines%
+  \@vobeyspaces%
+  \catcode`\%=13%
+  \catcode`\^^M=13%
+  \find@example}
+\def\endofcodeexample#1{%
+  \endgroup%
+  \ifcode@execute%
+    \setbox\codeexamplebox=\hbox{%
+      {%
+        {%
+          \returntospace%
+          \commenthandler%
+          \xdef\code@temp{#1}% removes returns and comments
+        }%
+        \colorbox{graphicbackground}{\color{black}\ignorespaces%
+          \code@pre\expandafter\scantokens\expandafter{\code@temp\ignorespaces}\code@post\ignorespaces}%
+      }%
+    }%
+    \ifdim\wd\codeexamplebox>\codeexamplewidth%
+      \def\code@start{\par}%
+      \def\code@flushstart{}\def\code@flushend{}%
+      \def\code@mid{\parskip2pt\par\noindent}%
+      %\def\code@width{\linewidth-6pt}% XXX
+      \setlength\finalcodeexamplewidth{\linewidth} % XXX
+      \addtolength\finalcodeexamplewidth{-6pt} % XXX
+      \def\code@end{}%
+    \else%
+      \def\code@start{%
+        \linewidth=\textwidth%
+        \parshape \@ne 0pt \linewidth
+        \leavevmode%
+        \hbox\bgroup}%
+      \def\code@flushstart{\hfill}%
+      \def\code@flushend{\hbox{}}%
+      \def\code@mid{\hskip6pt}%
+      %\def\code@width{\linewidth-12pt-\codeexamplewidth}% XXX
+      \setlength\finalcodeexamplewidth{\linewidth} % XXX
+      \addtolength\finalcodeexamplewidth{-12pt} % XXX
+      \addtolength\finalcodeexamplewidth{-\codeexamplewidth} % XXX
+      \def\code@end{\egroup}%
+    \fi%
+    \code@start%
+    \noindent%
+    \begin{minipage}[t]{\codeexamplewidth}\raggedright
+      \hrule width0pt%
+      \footnotesize\vskip-1em%
+      \code@flushstart\box\codeexamplebox\code@flushend%
+      \vskip-1ex
+      \leavevmode%
+    \end{minipage}%
+  \else%
+    \def\code@mid{\par}
+    %\def\code@width{\linewidth-6pt}% XXX
+    \setlength\finalcodeexamplewidth{\linewidth} % XXX
+    \addtolength\finalcodeexamplewidth{-6pt} % XXX
+    \def\code@end{}
+  \fi%
+  \code@mid%  
+  \colorbox{codebackground}{%
+%    \begin{minipage}[t]{\code@width}% XXX
+    \begin{minipage}[t]{\the\finalcodeexamplewidth}%
+      {%
+        \let\do\@makeother
+        \dospecials
+        \frenchspacing\@vobeyspaces
+        \normalfont\ttfamily\footnotesize
+        \typesetcomment%
+        \@tempswafalse
+        \def\par{%
+          \if@tempswa
+          \leavevmode \null \@@par\penalty\interlinepenalty
+          \else
+          \@tempswatrue
+          \ifhmode\@@par\penalty\interlinepenalty\fi
+          \fi}%
+        \obeylines
+        \everypar \expandafter{\the\everypar \unpenalty}%
+        #1}
+    \end{minipage}}%
+  \code@end%
+  \par%
+  \medskip
+  \end{codeexample}
+}
+
+\def\endcodeexample{}
+
+
+%<–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––>
+% code from various pgf/tikz source files and own modifications or additions
+%<–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––>
+
+\newenvironment{pgfmanualentry}{\list{}{\leftmargin=2em\itemindent-\leftmargin\def\makelabel##1{\hss##1}}}{\endlist}
+\newcommand\pgfmanualentryheadline[1]{\itemsep=0pt\parskip=0pt\item\strut{#1}\par\topsep=0pt}
+\newcommand\pgfmanualbody{\parskip3pt}
+
+\definecolor{darkred}{rgb}{0.75,0,0}
+\definecolor{green}{rgb}{0,.75,0}
+
+\def\bschar{{\char`\\}}
+
+\newcommand{\stylekeyheadline}[2][\pgfutil@empty]{%
+  \pgfmanualentryheadline{\texttt{\color{darkred}/tikz/#2}%
+  \def\pgf@test{#1}%
+  \ifx\pgf@test\pgfutil@empty%
+  \else%
+  \texttt{=}#1%
+  \fi%
+  \index{#2@\texttt{#2} key}}%
+}
+
+\newenvironment{stylekey}[2][]{
+  \begin{pgfmanualentry}
+    \stylekeyheadline[#1]{#2}
+    \pgfmanualbody
+}{
+  \end{pgfmanualentry}
+}
+\newcommand{\commandentry}[2][]{%
+  \texttt{\color{darkred}\textbackslash #2}#1%
+  \index{#2@\texttt{\textbackslash #2}}
+}
+\newenvironment{command}[2][]{
+  \begin{pgfmanualentry}
+    \pgfmanualentryheadline{\commandentry{#2}{#1}}
+    \pgfmanualbody
+}{
+  \end{pgfmanualentry}
+}
+\newcommand\arrowtip[1]{
+  \texttt{#1}\index{Arrow tips!mandatory@\protect\texttt{mandatory}}%
+}
+
+\newcommand{\opt}[1]{\color{green}#1}
+\newcommand{\meta}[1]{$\langle$\textit{#1}$\rangle$}
+\newcommand{\marg}[1]{\texttt{\textbraceleft}\meta{#1}\texttt{\textbraceright}}
+\newcommand{\oarg}[1]{\texttt{\textbraceleft} \texttt{\textbraceright}}
+
+% Global styles:
+\tikzset{
+  shape example/.style={
+    color=black!30,
+    draw,
+    fill=yellow!30,
+    line width=.25cm, % .5
+    inner xsep=1.25cm, % 2.5
+    inner ysep=0.25cm}  % 0.5
+}
+
+\def\tikzname{Ti\emph{k}Z}
+
+\makeatother
+
+%%% Enable '|' to type verbatim
+
+\usepackage{fancyvrb}
+\DefineShortVerb{\|}
+
+%<–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––>
+\endinput

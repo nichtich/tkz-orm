@@ -1,0 +1,26 @@
+Licenses for the tkz-orm package
+================================
+
+1. The code of the package (all *.sty files) is dual-licensed. 
+   This means that you can decide which license you wish to 
+   use when using the tkz-orm package. The two options are:
+
+   a) The GNU Public License, version 2
+   b) The LaTeX Project Public License, version 1.3c
+   
+2. The documentation of the package (all other files) can
+   be used under any version of any of the following licenses:
+
+   a) The Creative Commons Share-Alike license (CC-BY-SA)
+   b) The GNU Free Documentation License (GFDL)
+   c) The GNU Public License (GPL)
+   d) The LaTeX Project Public License
+
+The ``code of the package'' refers to all .sty files. Parts of
+the code are based on code of the original pgf-package.
+
+The ``documentation of the package`` refers to all other files.
+
+You will find some of the licenses as plain text versions as
+part of this package and more licenses on the Web.
+

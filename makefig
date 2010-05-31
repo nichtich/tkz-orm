@@ -1,0 +1,56 @@
+#!/usr/bin/perl
+
+use strict;
+use File::Temp;
+
+my $data = join('',<DATA>);
+
+# TODO: detect changes 
+
+foreach my $file ( @ARGV ) {
+
+    ($file =~ /^(.*\/)?([^\/]+)\.tex$/ and -f $file)
+        or die("please provide a .tex file!");
+    my $name = $2;
+
+    my $template = $data; 
+    $template =~ s/%s/$file/g;
+
+    open TMP, ">tmp.tex";
+    print TMP $template;
+    close TMP;
+
+    print "Create $name.pdf\n";
+    if (system("pdflatex -interaction=nonstopmode tmp.tex > /dev/null") == 0) {
+        system("mv tmp.pdf $name.pdf");
+    } else {
+        print STDERR "failed to create pdf\n";
+    }
+    system("rm tmp.*");
+}
+
+#    my $tempdir = tempdir( $template, CLEANUP => 0);
+#    print $tempdir;
+#    `cp $file $tempdir`;
+#    open ">
+#}
+
+__DATA__
+\documentclass{article}
+
+\usepackage{tikz,tkz-orm,moreverb}
+%\usepackage{tikz,nicefrac,amsmath,pifont}
+%\usetikzlibrary{arrows,snakes,backgrounds,patterns,matrix,shapes,fit,calc,shadows,plotmarks}
+
+%\usepackage[graphics,tightpage,active]{preview}
+%\PreviewEnvironment{tikzpicture}
+%\newlength{\imagewidth}
+%\newlength{\imagescale}
+
+\begin{document}
+
+\input{%s}
+
+\verbatimtabinput[4]{%s}
+
+\end{document}

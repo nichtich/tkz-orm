@@ -1,0 +1,47 @@
+================================================================
+  tkz-orm -- Object-Role Modeling diagrams in TeX 
+  version 0.1, January 25th, 2010
+
+== ABOUT =======================================================
+
+See the file tkz-orm.pdf for a manual.
+
+The permanent URL of this package is:
+ 
+  http://purl.org/net/tkz-orm
+
+== INSTALLATION =================================================
+
+The current version of tkz-orm requires a developer version of
+TikZ which you can get from http://www.texample.net/tikz/builds/
+Put the content of the zip (pgfCVSYYYY-MM-DD_TDS.zip) in your 
+local texmf directory, for instance ~/texmf or /usr/share/texmf/.
+
+To install tkz-orm you can use the Makefile and run 
+
+$ sudo make install
+
+or copy the file tkz-orm.sty into directory tex/latex/tkz-orm in
+your local texmf directory and run $ sudo texhash afterwards.
+
+== LICENSE ======================================================
+
+The code of this package is is dual-license under
+
+   a) The GNU Public License, version 2
+   b) The LaTeX Project Public License, version 1.3c
+ 
+The rest of this package is available under multiple licenses.
+
+See the file LICENSE for details.
+
+== MANIFEST =====================================================
+
+  tkz-orm.sty        - code of this package (LaTeX style file)
+  tkz-orm.pdf        - manual in PDF format
+  tkz-orm.tex        - LaTeX source of the manual
+  pgfmanualstyle.sty - Style file to build the manual
+  LICENSE            - information about licenses of this package
+  Makefile           - makefile for various tasks
+  README             - this file
+
