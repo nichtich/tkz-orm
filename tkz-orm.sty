@@ -64,10 +64,8 @@
 
 %%%% Text markup
 
-% textsubscript like textsuperscript
-\DeclareRobustCommand*\textsubscript[1]{%
-  \@textsubscript{\selectfont#1}}
-\renewcommand{\@textsubscript}[1]{%
+% textsubscript may not be defined like textsuperscript
+\newcommand{\orm@textsubscript}[1]{%
   {\m@th\ensuremath{_{\mbox{\fontsize\sf@size\z@#1}}}}}
 
 % similar to \blacktriangle (could better be implemented directly in pgf)
@@ -85,7 +83,7 @@
 \def\ormbf{\orm@font@bold}
 \def\ormc{\orm@font\color{constraintcolor}}
 \def\ormsup#1{\textsuperscript{\orm@font@scriptsize #1}}
-\def\ormsub#1{\textsubscript{\orm@font@scriptsize #1}}
+\def\ormsub#1{\orm@textsubscript{\orm@font@scriptsize #1}}
 \def\ormind#1{\textsuperscript{\orm@font@bold@scriptsize #1}}
 \def\ormbraces#1{{\orm@font\textbraceleft#1\textbraceright}}
 

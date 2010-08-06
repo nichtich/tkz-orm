@@ -7,8 +7,10 @@
 See the file tkz-orm.pdf for a manual.
 
 The permanent URL of this package is:
- 
   http://purl.org/net/tkz-orm
+
+Source code repository and issue tracker are located at:
+  http://github.com/nichtich/tkz-orm
 
 == INSTALLATION =================================================
 
@@ -44,4 +46,9 @@ See the file LICENSE for details.
   LICENSE            - information about licenses of this package
   Makefile           - makefile for various tasks
   README             - this file
+
+== FEEDBACK =====================================================
+
+Please report bug reports and feature requests at
+  http://github.com/nichtich/tkz-orm/issues
 
