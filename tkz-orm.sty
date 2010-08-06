@@ -67,7 +67,7 @@
 % textsubscript like textsuperscript
 \DeclareRobustCommand*\textsubscript[1]{%
   \@textsubscript{\selectfont#1}}
-\newcommand{\@textsubscript}[1]{%
+\renewcommand{\@textsubscript}[1]{%
   {\m@th\ensuremath{_{\mbox{\fontsize\sf@size\z@#1}}}}}
 
 % similar to \blacktriangle (could better be implemented directly in pgf)
@@ -471,6 +471,24 @@
   \draw[every constraint line] (270:0mm) to (270:1.75mm);
 }
 
+% TODO: document tree and otree
+\constraintdeclareasnode{tree}{
+  \fill[every constraint line,fill=white,draw=white] circle (2.2mm);
+  \path [ormdot]  (90:2mm) circle;
+  \path [ormdot] (210:2mm) circle;
+  \path [ormdot] (330:2mm) circle;
+  \path[every constraint line,rounded corners=0] (339:2mm) -- (90:2mm) -- (210:2mm);
+}
+
+\constraintdeclareasnode{otree}{
+  \fill[every constraint line,fill=white,draw=white] circle (2.2mm);
+  \path [ormdot]  (90:2mm) circle;
+  \path [ormdot] (210:2mm) circle;
+  \path [ormdot] (330:2mm) circle;
+  \path[every constraint line,rounded corners=0] (339:2mm) -- (90:2mm) -- (210:2mm);
+  \path[every constraint line,rounded corners=0] 
+    (.8mm,-0mm) -- (-.6mm,-1mm) -- (.8mm,-2mm);
+}
 
 \constraintdeclareasnode{purely reflexive}{
   \path [ormdot] (180:2mm) circle;

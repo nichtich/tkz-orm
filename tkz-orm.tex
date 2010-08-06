@@ -517,7 +517,7 @@ A ring constraint can be applied to any two roles of a predicate that are played
 \entity (P) {Person};
 \binary[below=of P,unique=2,label=below:mother of] (r) {};
 \plays (P) to (r.one north) (P) to (r.two north);
-\limits (r.north) to +(-1,0.4) node[constraint=acyclic]{};
+\limits (r.north) to +(-1,0.4) node[constraint=acyclic intransitive]{};
 \end{tikzpicture}
 \end{codeexample}
 
