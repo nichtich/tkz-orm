@@ -1,36 +1,53 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-	<title>tkz-orm @ GitHub</title>
-	
-	<style type="text/css">
-		body {
-  		margin-top: 1.0em;
-  		background-color: #fff;
-		  font-family: "Helvetica,Arial,FreeSans";
-  		color: #000000;
+    <title>tkz-orm @ GitHub</title>
+
+    <style type="text/css">
+    body {
+      margin-top: 1.0em;
+      background-color: #fff;
+      font-family: "Helvetica,Arial,FreeSans";
+      color: #000000;
     }
     #container {
       margin: 0 auto;
       width: 700px;
     }
-		h1 { font-size: 3.8em; color: #00f; margin-bottom: 3px; }
-		h1 .small { font-size: 0.4em; }
-		h1 a { text-decoration: none }
-		h2 { font-size: 1.5em; color: #00f; }
+    h1 { font-size: 3.8em; color: #00f; margin-bottom: 3px; }
+    h1 .small { font-size: 0.4em; }
+    h1 a { text-decoration: none }
+    h2 { font-size: 1.5em; color: #00f; }
     h3 { text-align: center; color: #00f; }
     a { color: #00f; }
     .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 0px; font-style: italic;}
     .download { float: right; }
-		pre { background: #000; color: #fff; padding: 15px;}
+    .sc { font-variant:small-caps; }
+    .ss { font-family:sans-serif; }
+    pre { background: #000; color: #fff; padding: 15px;}
     hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
     .footer { text-align:center; padding-top:30px; font-style: italic; }
-	</style>
-	
+    .tex { font-family: serif; letter-spacing: 1px; }
+    .tex sup {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.85em;
+  vertical-align: 0.15em;
+  margin-left: -0.36em;
+  margin-right: -0.15em;
+}
+.tex sub {
+  text-transform: uppercase;
+  vertical-align: -0.5ex;
+  margin-left: -0.1667em;
+  margin-right: -0.125em;
+  font-size: 1em;
+}
+    </style>
 </head>
 
 <body>
@@ -38,46 +55,53 @@
 
   <div id="container">
 
-    <div class="download">
-      <a href="http://github.com/nichtich/tkz-orm/zipball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
-      <a href="http://github.com/nichtich/tkz-orm/tarball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
-    </div>
-
-    <h1><a href="http://github.com/nichtich/tkz-orm">tkz-orm</a>
+    <h1><a href="http://github.com/nichtich/tkz-orm" class="ss">tkz-orm</a>
       <span class="small">by <a href="http://github.com/nichtich">nichtich</a></span></h1>
 
     <div class="description">
-      Object-Role Modeling diagrams in TeX
+      Object-Role Modeling diagrams in <span class="tex">T<sub>e</sub>X</span>
     </div>
 
-    <p>tkz-orm is a LaTeX package to draw Object-Role Model (ORM) diagrams. With tkz-orm you can "program" ORM2 diagrams just as you "program" your document when you use LaTeX.</p>
-<h2>Dependencies</h2>
-<p>tkz-orm is based on the pgf and TikZ picture macro package for TeX.</p>
-<h2>Install</h2>
-<p>See the file README for installing instructions.</p>
-<h2>License</h2>
-<p>Feel free to fork the tkz-orm code - you can select the GPL or the LaTeX Project PL or both. The documentation is also available under CC-BY-SA and GFDL.</p>
-<h2>Authors</h2>
-<p>Jakob Voss (jakob@nichtich.de)</p>
-
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="http://github.com/nichtich/tkz-orm/zipball/master">zip</a> or
-      <a href="http://github.com/nichtich/tkz-orm/tarball/master">tar</a> formats.
+    <p><span class="ss">tkz-orm</span> is a <span class="tex">L<sup>a</sup>T<sub>e</sub>X</span> package to draw <a href="http://www.orm.net/">Object-Role Model (ORM)</a> diagrams. With <span class="ss">tkz-orm</span> you can &#x201C;program&#x201D; ORM2 diagrams just as you &#x201C;program&#x201D; your document when you use <span class="tex">L<sup>a</sup>T<sub>e</sub>X</span>.
+    <span class="ss">tkz-orm</span> is based on the <a href="http://sourceforge.net/projects/pgf/"><span class="sc">pgf</span> and Ti<i>k</i>Z graphic system</a> for <span class="tex">T<sub>e</sub>X</span>.
     </p>
+
+    <h2>Documentation</h2>
+    <p>See <a href="http://github.com/nichtich/tkz-orm/raw/master/tkz-orm.pdf">tkz-orm.pdf</a>
+    for a documentation of <span class="ss">tkz-orm</span>.</p>
+
+    <h2>Download and Install</h2>
+    <p>The latest package release is available <a href="http://www.ctan.org/tex-archive/graphics/pgf/contrib/tkz-orm/">at CTAN</a>. See the file <a href="http://github.com/nichtich/tkz-orm/raw/master/README">README</a> for installing instructions.</p>
     <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
       by running:
       <pre>$ git clone git://github.com/nichtich/tkz-orm</pre>
     </p>
+    <p>The lastest development version can be downloaded in either
+      <a href="http://github.com/nichtich/tkz-orm/zipball/master">zip</a> or
+      <a href="http://github.com/nichtich/tkz-orm/tarball/master">tar</a> formats.
+    </p>
+
+    <h2>Example</h2>
+    <!-- This should be created automatically.
+         See http://www.texample.net/tikz/examples/tkz-orm-example/ -->
+    <p>
+      <img src="examples/employee.png"><br/>
+      Download as: 
+      [<a href="http://github.com/nichtich/tkz-orm/raw/master/examples/employee.tex">TEX</a>]
+      [<a href="examples/employee.pdf">PDF</a>]
+    </p>
+
+    <h2>License</h2>
+    <p>Feel free to fork <span class="ss">tkz-orm</span> &#8212; as specified in the <a href="http://github.com/nichtich/tkz-orm/raw/master/LICENSE">LICENSE</a> file you can select the <a href="http://www.gnu.org/licenses/gpl.html">GPL</a>, the <a href="http://www.latex-project.org/lppl/">LPPL</a> or both. The documentation is also available under <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a> and <a href="http://www.gnu.org/copyleft/fdl.html">GFDL</a>.</p>
+
+    <h2>Author</h2>
+    <p>Jakob Voss (jakob@nichtich.de)</p>
 
     <div class="footer">
       get the source code on GitHub : <a href="http://github.com/nichtich/tkz-orm">nichtich/tkz-orm</a>
     </div>
 
   </div>
-  
+
 </body>
 </html>
