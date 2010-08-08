@@ -4,11 +4,12 @@
 
 help:
 	@echo ""
-	@echo " make clean   - clean out directory"
-	@echo " make tidy    - clean out directory some more"
-	@echo " make ctan    - create a CTAN-ready archive"
-	@echo " make doc     - typeset documentation"
-	@echo " make install - install files in local texmf tree"
+	@echo " make clean    - clean out directory"
+	@echo " make tidy     - clean out directory some more"
+	@echo " make examples - create examples as PDF and PNG"
+	@echo " make ctan     - create a CTAN-ready archive"
+	@echo " make doc      - typeset documentation"
+	@echo " make install  - install files in local texmf tree"
 	@echo ""
 
 ################################################################
@@ -91,6 +92,16 @@ $(PACKAGE).blg $(PACKAGE).bbl: $(PACKAGE).tex $(PACKAGE).bib $(PACKAGE).aux
 	  rm -f $$NAME.$$I ; \
 	done
 
+%.png: %.tex
+	@sed 's/^\\begin{document}/\
+\\pgfrealjobname{dummy}\\begin{document}\\beginpgfgraphicnamed{example}/' $< | \
+sed 's/^\\end{document}/\\endpgfgraphicnamed\\end{document}/' > example.tex ; \
+	pdflatex --jobname=example example.tex ; \
+	gs -dNOPAUSE -r120 -dGraphicsAlphaBits=4 -dTextAlphaBits=4 -sDEVICE=png16m \
+-sOutputFile=$@ -dBATCH example.pdf ; \
+	mv example.pdf $(addsuffix .pdf, $(basename $<)) ; rm example.*
+
+
 ################################################################
 # User make options                                            #
 ################################################################
@@ -122,6 +133,8 @@ ctan: doc
 	rm -rf $(CTANROOT)/
 
 doc: $(foreach FILE,$(INCLUDEPDF),$(FILE).pdf)
+
+examples: $(foreach FILE,$(wildcard examples/*.tex),$(basename $(FILE)).png)
 
 install: 
 	echo Installing $(PACKAGE).sty

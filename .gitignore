@@ -17,3 +17,7 @@
 *.idx
 *.ilg
 *.ind
+
+# examples
+examples/*.png
+examples/*.pdf
