@@ -99,6 +99,7 @@ sed 's/^\\end{document}/\\endpgfgraphicnamed\\end{document}/' > example.tex ; \
 	pdflatex --jobname=example example.tex ; \
 	gs -dNOPAUSE -r120 -dGraphicsAlphaBits=4 -dTextAlphaBits=4 -sDEVICE=png16m \
 -sOutputFile=$@ -dBATCH example.pdf ; \
+	convert -thumbnail 200 $@ $(addsuffix .thumb.png, $(basename $@)) ; \
 	mv example.pdf $(addsuffix .pdf, $(basename $<)) ; rm example.*
 
 
