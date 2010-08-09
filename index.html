@@ -28,6 +28,7 @@
     .download { float: right; }
     .sc { font-variant:small-caps; }
     .ss { font-family:sans-serif; }
+    .examples td { vertical-align: bottom; text-align: center; }
     pre { background: #000; color: #fff; padding: 15px;}
     hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
     .footer { text-align:center; padding-top:30px; font-style: italic; }
@@ -75,20 +76,37 @@
     <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
       by running:
       <pre>$ git clone git://github.com/nichtich/tkz-orm</pre>
-    </p>
+    </p> <!-- TODO: explain how to checkout specific releases -->
     <p>The lastest development version can be downloaded in either
       <a href="http://github.com/nichtich/tkz-orm/zipball/master">zip</a> or
       <a href="http://github.com/nichtich/tkz-orm/tarball/master">tar</a> formats.
     </p>
 
-    <h2>Example</h2>
-    <!-- This should be created automatically.
+    <h2>Examples</h2>
+    <!-- TODO: This should be created automatically.
          See http://www.texample.net/tikz/examples/tkz-orm-example/ -->
     <p>
-      <img src="examples/employee.png"><br/>
-      Download as: 
+      Source files are included in the 
+      <a href="http://github.com/nichtich/tkz-orm/tree/master/examples/">examples directory</a>.
+      Contributions are welcome!
+    <table class="examples">
+    <tr><td>
+      <a href="examples/employee.png"><img src="examples/employee.thumb.png"></a><br/>
       [<a href="http://github.com/nichtich/tkz-orm/raw/master/examples/employee.tex">TEX</a>]
       [<a href="examples/employee.pdf">PDF</a>]
+      [<a href="examples/employee.png">PNG</a>]
+    </td>
+    <td>
+      <a href="examples/refmodes.png"><img src="examples/refmodes.thumb.png"></a><br/>
+      [<a href="http://github.com/nichtich/tkz-orm/raw/master/examples/refmodes.tex">TEX</a>]
+      [<a href="examples/refmodes.pdf">PDF</a>]
+      [<a href="examples/refmodes.png">PNG</a>]
+    </td>
+    </tr>
+    </table>
+    </p>
+    <p>To generate PDF and PNG files, get the project tree and call
+      <pre>$ make examples</pre>
     </p>
 
     <h2>License</h2>
