@@ -309,6 +309,8 @@ ORM provides a rich set of constraints: Mandatory constraints (section~\ref{sec:
 \label{sec:uniquenessconstraints}
 By default every row in a fact table is unique. To express additional uniqueness constraints on one or more roles of a fact table or to explicitly express the uniqueness on the full predicate, a \emph{uniqueness bar} is drawn above or below the fact roles. If the bar spans two or more non-adjacent roles, it is drawn as dotted line above or below the excluded roles. Bars can be stacked in multiple levels. To draw uniqueness bars you can use the following styles at predicate nodes:
 
+% TODO: add preferred unique (double line)
+
 \begin{stylekey}[\opt{\meta{from}\texttt{-}\meta{to}\texttt{:}\meta{level}}]{unique}
 Draws a uniqueness constraint bar above one or more roles. All parts of the key value are optional. As default a simple uniqueness bar above (\meta{level}|=1|) the first role (\meta{from}|=1|) is drawn. To make a bar span multiple roles, use the \meta{from}|-|\meta{to} syntax. Negative levels drawn the bar below the roles.
 \begin{codeexample}[]
@@ -673,7 +675,7 @@ You can distinguish primary and secondary subtypes by drawing the latter
 with a dashed arrow (|subtype2| or |suptype2|).
 
 \begin{stylekey}{subtype2}
-\stylekeyheadline[]{suptype}
+\stylekeyheadline[]{suptype2}
 Draw secondary subtype/supertype relationship arrows.
 \begin{codeexample}[]
 \begin{tikzpicture}
@@ -748,7 +750,19 @@ This style modifies the styles |every orm object| and |every predicate| so all o
 \end{figure}
 \end{stylekey}
 
-% TODO command \implied{ ... } and \duplicated{ ... } ?
+\begin{stylekey}{duplicated}
+\stylekeyheadline[]{implied}
+This styles work like |duplicated model| and |implied model| but only affect the current element.
+\begin{codeexample}[]
+\begin{tikzpicture}
+\entity[duplicated] (P) {Person};
+\value[right=1.6 of P] (V) {PersonName};
+\draw (P) to node[roles]{} (V);
+\node[constraint dot,implied] at (V.west) {};
+\end{tikzpicture}
+\end{codeexample}
+\end{stylekey}
+
 
 \begin{stylekey}{zoomed}
 This styles visualizes an object type as {\emph zoomed} by using a thicker line.

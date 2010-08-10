@@ -21,29 +21,40 @@ to implicitely specify a supertype.
   \entity {Page\\(URL)};     & \node{$\equiv$}; & \entity (Page) {Page}; 
   & \value[right] (URL) {URL};               & \node{\ormbf general}; \\
                              & \node{$\equiv$}; & \entity (Page2) {Page}; 
-  & \value[right] (PageURL) {PageURL}; & \value (URL2) {URL}; \\
+  & \value[right,implied] (PageURL) {PageURL}; & \value (URL2) {URL}; \\
   \entity {Mass\\(kg:)};     & \node{$\equiv$}; & \entity (Mass) {Mass}; 
   & \value[right] (kgValue) {kgValue};           & \node{\ormbf unit-based}; \\
   \entity {Price\\(\$:Money)}; & \node{$\equiv$}; & \entity (Price) {Price}; 
-  & & \value (D) {\$}; \\
+  & \value[right,xshift=6mm] (USD) {\$Value}; \\
+  & & \node[minimum height=8mm] {}; & & \node{dimension}; \\
   \entity {Article\\(:Text)}; & \node{$\equiv$}; & \entity (Article) {Article};
   & & \node {supertype}; \\
 };
 
-\draw[both required] (Person) to node[roles,unique,unique=2]{} (PersonName);
-\draw[required] (Page) to node[roles,unique,unique=2]{} (URL);
+\draw[required] (Person) to node[roles,preferred unique,unique=2]{} (PersonName);
+\node[constraint dot,implied] at (PersonName.west) {};
+\draw[required] (Page) to node[roles,preferred unique,unique=2]{} (URL);
 
-\draw[both required] (Page2) to node[roles,unique,unique=2]{} (PageURL);
+\draw[required] (Page2) to node[roles,preferred unique,unique=2]{} (PageURL);
+\node[constraint dot,implied] at (PageURL.west) {};
 \draw[suptype] (PageURL) to (URL2);
 
-\draw[required] (Mass) to node[roles,unique,unique=2]{} (kgValue);
+\draw[required] (Mass) to node[roles,preferred unique,unique=2]{} (kgValue);
 
-\entity[left=18mm of D] (Money) {Money};
-\draw[suptype] (Price) to (Money);
-\draw[required] (Money) to node[roles,unique,unique=2]{} (D);
+\draw[required] (Price) to node[roles,preferred unique,unique=2] (r1) {} (USD);
+\begin{scope}[implied model] % TODO: fix "implied model"
+\entity[below=7mm of Price,implied] (MoneyValue) {MoneyValue};
+\draw[subtype] (Price) -- (MoneyValue);
+\node[roles,right=of MoneyValue,unique=1:-1,unique=2:-1] (r2) {};
+\draw (MoneyValue) to (r2);
+\draw[required] (USD) |- (r2);
+\node[constraint dot,implied] at (USD.south) {};
+\draw[limits to] (r1) to node (x) {} (r2);
+\node[constraint=subset,implied] at ($(r1)!0.4!(r2)$) {};
+\end{scope}
 
-\entity[right=6mm of Article] (Text) {Text};
-\draw[suptype] (Article) to (Text);
+\entity[right=6mm of Article,implied] (TextValue) {TextValue};
+\draw[suptype] (Article) to (TextValue);
 
 \end{tikzpicture}
 \end{document}
