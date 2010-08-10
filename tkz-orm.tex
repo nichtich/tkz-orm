@@ -72,7 +72,7 @@ This style is to be used with nodes that represent entity types.
 \begin{tikzpicture}
   \node[entity] at (0,0) {Foo};
   \node[entity] (unnamed) at (1.2,0) {};
-  \node[entity] at (2.5,0) {Person\\(.Id)};
+  \node[entity] at (2.5,0) {Person\\(.name)};
 \end{tikzpicture}
 \end{codeexample}
 \end{stylekey}
@@ -302,8 +302,11 @@ Adds a role index as small label at the $n$th role box (default: $n$).
 
 \section{Constraints}
 \label{sec:constraints}\index{Constraints}
-ORM provides a rich set of constraints: Mandatory constraints (section~\ref{sec:mandatoryconstraints}) and uniqueness constraints (section~\ref{sec:uniquenessconstraints}) limit the way objects can be combined in predicates. External constraints (section~\ref{sec:externalconstraints}) and subtype constraints (section~\ref{sec:subtyping}) involve multiple roles or object types. All constraints are displayed in violet color and either drawn directly at an object type or role, or linked to one or more object types or role with dotted or dashed lines or arrows (see the styles |limits| and |limits to|). ORM2 defines a set of symbols for external (section~\ref{sec:externalconstraints}), ring (section~\ref{sec:ringconstraints}) and other types of constraints. The general \textsc{tkz-orm} constraint key |constraint| only sets the font to violet. An optional key value can be used to add a predefined constraint symbol at the current position.
+ORM provides a rich set of constraints: Mandatory constraints (section~\ref{sec:mandatoryconstraints}) and uniqueness constraints (section~\ref{sec:uniquenessconstraints}) limit the way objects can be combined in predicates. External constraints (section~\ref{sec:externalconstraints}) and subtype constraints (section~\ref{sec:subtyping}) involve multiple roles or object types. All constraints are displayed in magenta and either drawn directly at an object type or role, or linked to one or more object types or role with dotted or dashed lines or arrows (see the styles |limits| and |limits to|). ORM2 defines a set of symbols for external (section~\ref{sec:externalconstraints}), ring (section~\ref{sec:ringconstraints}) and other types of constraints. The general \textsc{tkz-orm} constraint key |constraint| only sets the font to violet. An optional key value can be used to add a predefined constraint symbol at the current position.
 
+\begin{stylekey}[\meta{color}]{constraintcolor}
+Changes the constraint color (default: |magenta!100|).
+\end{stylekey}
 
 \subsection{Uniqueness Constraints}
 \label{sec:uniquenessconstraints}

@@ -47,9 +47,12 @@
 }
 \tikzstyle{noarrows}=[arrows=none-none]
 
+%\pgfkeysdefargs{/tikz/ormcolorlet}{#1}{\colorlet{#2}{#1}} 
 
 %%%% ORM color constants
-\definecolor{constraintcolor}{rgb}{1,0,1}
+\colorlet{constraintcolor}{magenta!100}
+
+\pgfkeysdefargs{/tikz/constraintcolor}{#1}{\colorlet{constraintcolor}{#1}} 
 
 %%%% ORM width and length
 \newlength{\orm@linewidth}
@@ -250,8 +253,10 @@
 
 
 
-\tikzstyle{constraint dot}  = [fill=constraintcolor,minimum size=1.5mm,draw=none,shape=circle,inner sep=0]
-\tikzstyle{cdot}=[constraint dot]
+\tikzstyle{every constraint dot} = []
+\tikzstyle{constraint dot}  = [fill=constraintcolor,minimum size=1.5mm,
+                        draw=none,shape=circle,inner sep=0,every constraint dot]
+\tikzstyle{cdot}            = [constraint dot]
 
 
 %%%% Constraint symbols
@@ -278,9 +283,18 @@
 \tikzstyle{duplicated model}=       [every orm/.append style={drop shadow},
                                      every predicate/.append style={drop shadow}]
 
-\tikzstyle{implied}=                [fill=gray!30,thin]
-\tikzstyle{implied model}=          [every orm/.append style={fill=gray!30},
-                                     every orm line/.append style={thin}]
+% TODO: cdot,implied is not shown in constraint color but filled
+% this does not work:
+%  every implied line/.style={constraintcolor=blue!90},
+%  every implied/.style={fill=blue!30,every implied line}
+% implied,cdot != cdot,implied != implied mode,cdot
+\tikzstyle{every implied line}=     [constraintcolor=gray!80,thin]
+\tikzstyle{every implied}=          [fill=gray!30,every implied line]
+
+\tikzstyle{implied}=                [every implied,every implied line]
+\tikzstyle{implied model}=          [every orm/.append style={every implied},
+                                     every orm line/.append style={every implied line},
+                                     every implied line]
 
 %%%% Constraints
 
@@ -559,7 +573,7 @@
 % TODO: strictly order, total, connected, etc.
 
 
-
+% TODO: test and document this
 \tikzset{objectification/.style={
   entity,fill=none,
   append after command={

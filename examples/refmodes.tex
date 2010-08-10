@@ -32,25 +32,25 @@ to implicitely specify a supertype.
 };
 
 \draw[required] (Person) to node[roles,preferred unique,unique=2]{} (PersonName);
-\node[constraint dot,implied] at (PersonName.west) {};
+\node[cdot,implied] at (PersonName.west) {};
 \draw[required] (Page) to node[roles,preferred unique,unique=2]{} (URL);
 
 \draw[required] (Page2) to node[roles,preferred unique,unique=2]{} (PageURL);
-\node[constraint dot,implied] at (PageURL.west) {};
+\node[cdot,implied] at (PageURL.west) {};
 \draw[suptype] (PageURL) to (URL2);
 
 \draw[required] (Mass) to node[roles,preferred unique,unique=2]{} (kgValue);
 
 \draw[required] (Price) to node[roles,preferred unique,unique=2] (r1) {} (USD);
-\begin{scope}[implied model] % TODO: fix "implied model"
-\entity[below=7mm of Price,implied] (MoneyValue) {MoneyValue};
+\begin{scope}[implied model]
+\entity[below=7mm of Price] (MoneyValue) {MoneyValue};
 \draw[subtype] (Price) -- (MoneyValue);
 \node[roles,right=of MoneyValue,unique=1:-1,unique=2:-1] (r2) {};
-\draw (MoneyValue) to (r2);
-\draw[required] (USD) |- (r2);
-\node[constraint dot,implied] at (USD.south) {};
-\draw[limits to] (r1) to node (x) {} (r2);
-\node[constraint=subset,implied] at ($(r1)!0.4!(r2)$) {};
+\plays (MoneyValue) to (r2);
+\plays[required] (USD) |- (r2);
+\node[cdot] at (USD.south) {};
+\plays[limits to] (r1) to node (x) {} (r2);
+\node[constraint=subset] at ($(r1)!0.4!(r2)$) {};
 \end{scope}
 
 \entity[right=6mm of Article,implied] (TextValue) {TextValue};
