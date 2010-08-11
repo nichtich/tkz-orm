@@ -8,10 +8,10 @@
 % 1. under the LaTeX Project Public License and/or
 % 2. under the GNU Public License.
 %
-% Copyright 2009 by Jakob Voss
+% Copyright 2009-2010 by Jakob Voss
 %<–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––>
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{tkz-orm}[2010/08/09 v0.1dev Object-Role Modeling]
+\ProvidesPackage{tkz-orm}[2010/08/11 v0.1dev Object-Role Modeling]
 %<–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––>
 \RequirePackage{tikz}[2009/09/04]
 
@@ -205,6 +205,29 @@
 
 % TODO: read
 % http://www.latex-project.org/guides/clsguide.pdf
+
+% dot as arrow head (no color yet)
+\pgfarrowsdeclare{dot}{dot}{
+  \pgfutil@tempdima=0.2pt%
+  \advance\pgfutil@tempdima by.2\pgflinewidth%
+  \pgfutil@tempdimb=5.5\pgfutil@tempdima\advance\pgfutil@tempdimb
+  by\pgflinewidth
+  \pgfarrowsleftextend{+-\pgfutil@tempdimb}
+  \pgfutil@tempdimb=1.5\pgfutil@tempdima\advance\pgfutil@tempdimb
+  by.5\pgflinewidth
+  \pgfarrowsrightextend{+\pgfutil@tempdimb}
+}{
+  \pgfutil@tempdima=0.2pt%
+  \advance\pgfutil@tempdima by.2\pgflinewidth%
+  \pgfsetdash{}{+0pt}
+  % \pgfsys@color@rgb{1}{0}{1} % TODO: constraint dot by using color
+  \pgfpathcircle{\pgfqpoint{+3\pgfutil@tempdima}{0pt}}{+4.5\pgfutil@tempdima}
+  \pgfusepathqfillstroke
+}
+
+% new arrow heads >dot and dot<
+\pgfarrowsdeclarecombine[-3\pgflinewidth]{>dot}{>dot}{to}{to}{dot}{dot}
+\pgfarrowsdeclarecombine[-3\pgflinewidth]{dot<}{dot<}{to}{to}{dot}{dot}
 
 \pgfarrowsdeclare{orm arrow}{orm arrow}
 {
