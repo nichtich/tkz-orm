@@ -42,6 +42,9 @@ See the file LICENSE for details.
   tkz-orm.sty        - code of this package (LaTeX style file)
   tkz-orm.pdf        - manual in PDF format
   tkz-orm.tex        - LaTeX source of the manual
+  tkz-orm.bib        - BibTeX source of the manual
+  ormcheatsheet.tex  - ORM2 cheat sheet (sources)
+  ormcheatsheet.pdf  - ORM2 cheat sheet in PDF format
   pgfmanualstyle.sty - Style file to build the manual
   LICENSE            - information about licenses of this package
   Makefile           - makefile for various tasks
