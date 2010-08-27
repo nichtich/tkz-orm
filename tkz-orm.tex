@@ -22,7 +22,7 @@
 % --------------------------------------------------------------
 %% Beginning of the documentation
 % --------------------------------------------------------------
-\title{The \textsf{tkz-orm} package\\Object-Role Model Drawing Library}
+\title{The \tkzorm package\\Object-Role Model Drawing Library}
 \author{Jakob Vo\ss\\{\footnotesize jakob.voss@gbv.de}}
 \date{Version \ormVersion\\\ormDate\\[5mm]\url{http://purl.org/net/tkz-orm}}
 
@@ -40,13 +40,13 @@ diagrams in \TeX{} based on the \textsc{pgf} and \tikzname\ picture environment.
 \section{Introduction}
 \label{sec:introduction}
 
-\textsf{tkz-orm} is intended to help you creating Object-Role Model (ORM) diagrams. It is based on the \textsc{pgf} and \tikzname\footnote{\url{http://sourceforge.net/projects/pgf/}} picture macro package for \TeX. and provides additional styles and commands to typeset ORM2 diagrams.\footnote{This version is tested with \tikzname{} version 2.00-cvs 2009-09-04. It will either be backported to \tikzname{} version 2.00 or work with a yet to published new release of \tikzname{}.} With \textsf{tkz-orm} you can ``program'' ORM diagrams just as you ``program'' your document when you use \LaTeX\ -- including the inherental lack of \textsc{wysiwyg}. Unless multi-touch e-paper interfaces become usable, \textsf{tkz-orm} can best be combined with a whiteboard or paper and pencil --- but you may also find ways to automatically create ORM diagrams with \textsf{tkz-orm}.
+\tkzorm\ is intended to help you creating Object-Role Model (ORM) diagrams. It is based on the \textsc{pgf} and \tikzname\footnote{\url{http://sourceforge.net/projects/pgf/}} picture macro package for \TeX. and provides additional styles and commands to typeset ORM2 diagrams.\footnote{This version is tested with \tikzname\ version 2.00-cvs 2009-09-04. It will either be backported to \tikzname\ version 2.00 or work with a yet to published new release of \tikzname{}.} With \tkzorm\ you can ``program'' ORM diagrams just as you ``program'' your document when you use \LaTeX\ -- including the inherental lack of \textsc{wysiwyg}. Unless multi-touch e-paper interfaces become usable, \tkzorm\ can best be combined with a whiteboard or paper and pencil --- but you may also find ways to automatically create ORM diagrams with \tkzorm.
 
 \subsection*{Status of this package}
-This is the first public version of \textsf{tkz-orm}. Please send your comments to the author so the package can be improved. All parts of the package are available at least under the \LaTeX{} Project Public License\cite{LPPL} and the GNU Public license\cite{GPL2}. For details have a look at the file |LICENSE| that is part of this package. The permament URL of \textsf{tkz-orm} is \url{http://purl.org/net/tkz-orm} which redirects you to its current location.
+This is the first public version of \tkzorm. Please send your comments to the author so the package can be improved. All parts of the package are available at least under the \LaTeX{} Project Public License\cite{LPPL} and the GNU Public license\cite{GPL2}. For details have a look at the file |LICENSE| that is part of this package. The permament URL of \tkzorm is \url{http://purl.org/net/tkz-orm} which redirects you to its current location.
 
 \subsection*{ORM in a nutshell}
-Object-Role Modeling (ORM)\footnote{\url{http://www.orm.net/}} is a fact-oriented modeling language that evolved from the \textit{Natural-language Information Analysis Method} (NIAM) by G.M. Nijssen. The current version (ORM2) is mainly based on works of Terry Halpin. Like ERM, UML, and other data modeling languages ORM helps to identify and abstract information objects, relationships, and rules in a Universe of Discourse to be formalized and implemented on another level. ORM includes a graphical notation and a defined verbalization in natural language. Models can further be validated by populating fact tables with sample data. An overview of the ORM2 Graphical Notation is given in \cite{Halpin2005} and more details in \cite{Halpin2008}. An ORM model consists of object types (section~\ref{sec:objecttypes}), $n$-ary predicates  (section~\ref{sec:predicates}). Each of the $n$ roles of an $n$-ary predicate is connected to an object type that plays the specific role in this predicate. Furthermore a model can contain constraints (section~\ref{sec:constraints}), subtypes (section~\ref{sec:subtyping}), and additional features (section~\ref{sec:additionalfeatures}). \textsf{tkz-orm} also allows you to change the appearance of ORM diagrams (section~\ref{sec:generalstyles}).
+Object-Role Modeling (ORM)\footnote{\url{http://www.orm.net/}} is a fact-oriented modeling language that evolved from the \textit{Natural-language Information Analysis Method} (NIAM) by G.M. Nijssen. The current version (ORM2) is mainly based on works of Terry Halpin. Like ERM, UML, and other data modeling languages ORM helps to identify and abstract information objects, relationships, and rules in a Universe of Discourse to be formalized and implemented on another level. ORM includes a graphical notation and a defined verbalization in natural language. Models can further be validated by populating fact tables with sample data. An overview of the ORM2 Graphical Notation is given in \cite{Halpin2005} and more details in \cite{Halpin2008}. An ORM model consists of object types (section~\ref{sec:objecttypes}), $n$-ary predicates  (section~\ref{sec:predicates}). Each of the $n$ roles of an $n$-ary predicate is connected to an object type that plays the specific role in this predicate. Furthermore a model can contain constraints (section~\ref{sec:constraints}), subtypes (section~\ref{sec:subtyping}), and additional features (section~\ref{sec:additionalfeatures}). \tkzorm also allows you to change the appearance of ORM diagrams (section~\ref{sec:generalstyles}).
 
 \begin{figure}[ht]
   \begin{tikzpicture}
@@ -387,7 +387,7 @@ Draws the current node as mandatory role dot.
 
 \begin{stylekey}{mandatory}
 \stylekeyheadline[]{required}
-This styles enables the |relationship| style and add a mandatory role dot at the start of a straight line.
+This styles enables the |relationship| style and adds a mandatory role dot at the start of a straight line.
 \begin{codeexample}[]
 \begin{tikzpicture}
   \entity (A) {A};
@@ -398,7 +398,7 @@ This styles enables the |relationship| style and add a mandatory role dot at the
 \end{stylekey}
 
 \begin{stylekey}{required by}
-This styles enables the |relationship| style and add a mandatory role dot at the end of a straight line.
+This styles enables the |relationship| style and adds a mandatory role dot at the end of a straight line.
 \begin{codeexample}[]
 \begin{tikzpicture}
   \entity (A) {A};
@@ -426,10 +426,10 @@ This styles enables the |relationship| style and adds mandatory role dots at bot
 
 \subsection{External constraints}
 \label{sec:externalconstraints}
-External constraints span multiple roles that may come from different predicates. They are draw with circled symbol next to the roles, possibly linked to them with a dotted or dashed line (style |limits| and |limits to|).
+External constraints span multiple roles that may come from different predicates. They are depicted by several circle symbols next the roles they limit, possibly linked to them with a dotted or dashed line (style |limits| and |limits to|). \tkzorm\ implements external constraint symbols as node shapes.
 
 \begin{stylekey}[\opt{\meta{constraint type}}]{constraint}
-  This style sets the font to ORM style on constraint color (violet). If you provide a constraint type as key value, the current node is shaped as constraint circle and the symbol of the specified constraint type is drawn. The most common constraint types are |exclusive| (alias |x|) to indicate that populations of two or more role-sequences must be mutually exclusive, |mandatory| (alias |required|, |total|, and |or|) to indicate that each at least on of two more roles must be played by an object type, and |xor| (alias |partition|) to indicates that exactely one of two or more roles must be played by an object type. These constraints can also be used in subtyping (section~\ref{sec:subtyping}). The constraint type |unique| and |preferred unique| enforces combinations of object types that play a given set of roles to always be the same. The types |equal|, |subset|, and |supset| indicate that tuples of roles have to be equal, subset or superset compared to each other (|supset| is not included in standard ORM2). The constraint type is |misc| only draws the circle and can be used for custom constraints.
+  This style sets the font to ORM style on constraint color (violet). If you provide a constraint type as key value, the current node is shaped as constraint circle and the symbol of the specified constraint type is drawn. The most common constraint types are |exclusive| (alias |x|) to indicate that populations of two or more role-sequences must be mutually exclusive, |mandatory| (alias |required|, |total|, and |or|) to indicate that each at least on of two more roles must be played by an object type, and |xor| (alias |partition|) to indicates that exactely one of two or more roles must be played by an object type. These constraints can also be used in subtyping (section~\ref{sec:subtyping}). The constraint type |unique| and |preferred unique| enforces combinations of object types that play a given set of roles to always be the same. The types |equal|, |subset|, and |supset| indicate that tuples of roles have to be equal, subset or superset compared to each other (|supset| is not included in standard ORM2). The constraint type is |external| only draws the circle and can be used for custom constraints.
   % TODO: see more about rings and collections ...
 \begin{codeexample}[]
 \begin{tikzpicture}[orm]
@@ -440,7 +440,7 @@ External constraints span multiple roles that may come from different predicates
     \node[constraint=xor]{}; & \node[right]{xor / partition}; \\
     \node[constraint=unique] {}; & \node[right]{unique}; &
     \node[constraint=preferred unique]{};&\node[right]{preferred unique};&
-    \node[constraint=misc]{}; & \node[right]{misc}; \\
+    \node[constraint=external]{}; & \node[right]{external}; \\
     \node[constraint=equal] {}; & \node[right]{equal}; &
     \node[constraint=subset] {}; & \node[right]{subset}; &
     \node[constraint=supset] {}; & \node[right]{supset}; \\
@@ -475,23 +475,32 @@ External constraints span multiple roles that may come from different predicates
   % TODO: example of subtyping constraints
 \end{stylekey}
 
-\begin{command}[]{limits}
-This command is an abbreviation for |\draw[limits]| inside |{tikzpicture}|.
-\end{command}
-
 \begin{stylekey}{limits to}  % TODO: add optional parameter
 This style is to be used with directed lines that connect constraint circles and roles. The line is drawn in the same style as |limits| but dashed and with an arrow tip of style \arrowtip{orm arrow} at the head.
 \begin{codeexample}[width=3.4cm]
 \begin{tikzpicture}[orm]
   \unary[index=2] (a) at (0,0) {};
   \unary[index=1] (b) at (0,-1.4) {};
-  \draw[limits to] (b) -- (a) node[pos=.4,name=s]{};
-  \node[constraint=subset] at (s) {};
+  \draw[limits to] (b) -- (a) 
+    node[pos=.4,constraint=subset,name=s]{};
   \node[right=2mm of s,text width=2.3cm] 
   {Each object that plays role 1 also plays role 2};
 \end{tikzpicture}
 \end{codeexample}
 \end{stylekey}
+
+\begin{command}[]{limits}
+\end{command}
+\begin{command}[]{limitsto}
+%\stylekeyheadline[]{limits to}
+Inside |{tikzpicture}| these commands can be used as abbreviations for
+|\draw[limits]| and |\draw[limits to]|.
+\begin{codeexample}[width=3.4cm]
+\begin{tikzpicture}[orm]
+\limits (0,.4) to (1,.4); \limitsto (0,0) to (1,0);
+\end{tikzpicture}
+\end{codeexample}
+\end{command}
 
 \begin{command}[\marg{constraint type name}\marg{path code}]{constraintdeclare}
   This command declares a new constraint type. The \marg{path code} is passed to the |append after command| key to be drawn after the constraint circle. Unless you want to extend ORM you do not need to declare new constraint types.
@@ -675,16 +684,16 @@ Works in the same way as |subtype| but with reverse direction.
 
 \noindent Multiple inheritance may require to select one path as primary.
 You can distinguish primary and secondary subtypes by drawing the latter
-with a dashed arrow (|subtype2| or |suptype2|).
+with a dashed arrow (|subinterface| or |supinterface|).
 
-\begin{stylekey}{subtype2}
-\stylekeyheadline[]{suptype2}
-Draw secondary subtype/supertype relationship arrows.
+\begin{stylekey}{subinterface}
+\stylekeyheadline[]{supinterface}
+Draw secondary subtype/supertype relationship arrows. 
 \begin{codeexample}[]
 \begin{tikzpicture}
   \node[entity] (A) {Animal};
   \node[entity] (P) [right=8mm of A] {Person};
-  \draw[suptype2] (P) to (A);
+  \draw[supinterface] (P) to (A);
 \end{tikzpicture}
 \end{codeexample}
 \end{stylekey}
@@ -734,6 +743,7 @@ This style modifies the styles |every orm object| and |every predicate| so all o
 
 \begin{stylekey}{implied model}
   This style modifies the styles |every orm line| and |every orm object| in the current scope to draw all lines thin and all objects filled gray.
+  The style is currently broken.
 \begin{figure}[h]
 \centering
 \begin{codeexample}[]
@@ -756,12 +766,13 @@ This style modifies the styles |every orm object| and |every predicate| so all o
 \begin{stylekey}{duplicated}
 \stylekeyheadline[]{implied}
 This styles work like |duplicated model| and |implied model| but only affect the current element.
+The style are currently broken.
 \begin{codeexample}[]
 \begin{tikzpicture}
 \entity[duplicated] (P) {Person};
-\value[right=1.6 of P] (V) {PersonName};
-\draw (P) to node[roles]{} (V);
-\node[constraint dot,implied] at (V.west) {};
+\value[implied,right=1.6 of P] (V) {PersonName};
+\draw[implied,both required] (P) to 
+  node[roles,unique=1,unique=2]{} (V);
 \end{tikzpicture}
 \end{codeexample}
 \end{stylekey}
@@ -776,6 +787,30 @@ This styles visualizes an object type as {\emph zoomed} by using a thicker line.
 \end{tikzpicture}
 \end{codeexample}
 \end{stylekey}
+
+
+\subsection{Arrow heads}
+\label{sec:arrowheads}
+Constraint dots are implemented as arrow heads. The normal constraint 
+dot is drawn with arrow head |mdot| for mandatory. Furthemore there is an
+implicit mandatory constraint dot (|idot|), a deontic mandatory constraint 
+dot (|odot|), and a implied deontic mandatory constraint dot (|iodot|). You 
+\emph{should not} directly use this arrow heads but the mandatory role 
+constraints |cdot|, |required| etc. (\ref{sec:mandatoryconstraints}) which
+can be modified by other styles.
+
+\begin{codeexample}[]
+\begin{tikzpicture}[orm]
+\matrix [row sep=2mm,column sep=3mm,every entity/.style={minimum width=10mm}]{
+  \entity[label=left:strict,label=above:explicit,right] (m) {mdot}; &
+  \entity[label=above:implicit] (i) {idot}; \\
+  \entity[label=left:deontic,right] (o) {odot}; &
+  \entity (io) {iodot}; \\ };
+\draw[mdot-idot] (m) to (i);
+\draw[odot-iodot] (o) to (io);
+\end{tikzpicture}
+\end{codeexample}
+
 
 \subsection{Macros for text layout} 
 \label{sec:ormtext}
