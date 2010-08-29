@@ -7,7 +7,7 @@
 \usetikzlibrary{positioning} % for left/right=of ...
 
 \usepackage[colorlinks=false,pdfborder={0 0 0}]{hyperref}
-% [pagebackref=true, backref=true, pdfborder={0 0 0}
+% [pagebackref=true, backref=true
 \usepackage{multirow}
 
 \usepackage{makeidx}
@@ -22,16 +22,16 @@
 % --------------------------------------------------------------
 %% Beginning of the documentation
 % --------------------------------------------------------------
-\title{The \tkzorm package\\Object-Role Model Drawing Library}
+\title{The \tkzorm\ package\\Object-Role Model Drawing Library}
 \author{Jakob Vo\ss\\{\footnotesize jakob.voss@gbv.de}}
 \date{Version \ormVersion\\\ormDate\\[5mm]\url{http://purl.org/net/tkz-orm}}
 
 \begin{document}
 \maketitle
 
-\begin{abstract}
-This package provides styles for drawing Object-Role Model (ORM)
-diagrams in \TeX{} based on the \textsc{pgf} and \tikzname\ picture environment.
+\begin{abstract}\noindent
+This package provides styles for drawing Object-Role Model (ORM2) diagrams
+in \TeX\ based on the \textsc{pgf} and \tikzname\ picture environment.
 \end{abstract}
 
 \tableofcontents
@@ -40,13 +40,13 @@ diagrams in \TeX{} based on the \textsc{pgf} and \tikzname\ picture environment.
 \section{Introduction}
 \label{sec:introduction}
 
-\tkzorm\ is intended to help you creating Object-Role Model (ORM) diagrams. It is based on the \textsc{pgf} and \tikzname\footnote{\url{http://sourceforge.net/projects/pgf/}} picture macro package for \TeX. and provides additional styles and commands to typeset ORM2 diagrams.\footnote{This version is tested with \tikzname\ version 2.00-cvs 2009-09-04. It will either be backported to \tikzname\ version 2.00 or work with a yet to published new release of \tikzname{}.} With \tkzorm\ you can ``program'' ORM diagrams just as you ``program'' your document when you use \LaTeX\ -- including the inherental lack of \textsc{wysiwyg}. Unless multi-touch e-paper interfaces become usable, \tkzorm\ can best be combined with a whiteboard or paper and pencil --- but you may also find ways to automatically create ORM diagrams with \tkzorm.
+\tkzorm\ is intended to help you creating Object-Role Model (ORM) diagrams. It is based on the \textsc{pgf} and \tikzname\footnote{Available at \url{http://sourceforge.net/projects/pgf/}.\\This document was created with \tikzname\ version \pgftypesetversion} picture macro package for \TeX. and provides additional styles and commands to typeset ORM2 diagrams. With \tkzorm\ you can ``program'' ORM diagrams just as you ``program'' your document when you use \LaTeX\ -- including the inherental lack of \textsc{wysiwyg}. Unless multi-touch e-paper interfaces become usable, \tkzorm\ can best be combined with a whiteboard or paper and pencil --- but you may also find ways to automatically create ORM diagrams with \tkzorm.
 
 \subsection*{Status of this package}
-This is the first public version of \tkzorm. Please send your comments to the author so the package can be improved. All parts of the package are available at least under the \LaTeX{} Project Public License\cite{LPPL} and the GNU Public license\cite{GPL2}. For details have a look at the file |LICENSE| that is part of this package. The permament URL of \tkzorm is \url{http://purl.org/net/tkz-orm} which redirects you to its current location.
+This is the developer version of \tkzorm. Please send your comments to the author so the package can be improved. All parts of the package are available at least under the \LaTeX{} Project Public License\cite{LPPL} and the GNU Public license\cite{GPL2}. For details have a look at the file |LICENSE| that is part of this package. The permament URL of \tkzorm is \url{http://purl.org/net/tkz-orm} which redirects you to its current location and a collection of examples.
 
 \subsection*{ORM in a nutshell}
-Object-Role Modeling (ORM)\footnote{\url{http://www.orm.net/}} is a fact-oriented modeling language that evolved from the \textit{Natural-language Information Analysis Method} (NIAM) by G.M. Nijssen. The current version (ORM2) is mainly based on works of Terry Halpin. Like ERM, UML, and other data modeling languages ORM helps to identify and abstract information objects, relationships, and rules in a Universe of Discourse to be formalized and implemented on another level. ORM includes a graphical notation and a defined verbalization in natural language. Models can further be validated by populating fact tables with sample data. An overview of the ORM2 Graphical Notation is given in \cite{Halpin2005} and more details in \cite{Halpin2008}. An ORM model consists of object types (section~\ref{sec:objecttypes}), $n$-ary predicates  (section~\ref{sec:predicates}). Each of the $n$ roles of an $n$-ary predicate is connected to an object type that plays the specific role in this predicate. Furthermore a model can contain constraints (section~\ref{sec:constraints}), subtypes (section~\ref{sec:subtyping}), and additional features (section~\ref{sec:additionalfeatures}). \tkzorm also allows you to change the appearance of ORM diagrams (section~\ref{sec:generalstyles}).
+Object-Role Modeling (ORM)\footnote{See \url{http://www.orm.net/}.} is a fact-oriented modeling language that evolved from the \textit{Natural-language Information Analysis Method} (NIAM) by G.M. Nijssen. The current version (ORM2) is mainly based on works of Terry Halpin. Like ERM, UML, and other data modeling languages ORM helps to identify and abstract information objects, relationships, and rules of a Universe of Discourse to be formalized and implemented on another level. ORM includes a graphical notation and a precise verbalization in natural language. Models can further be validated by populating fact tables with sample data. An overview of the ORM2 graphical notation is given in \cite{Halpin2005} and more details in \cite{Halpin2008}. An ORM model consists of object types (section~\ref{sec:objecttypes}) and predicates  (section~\ref{sec:predicates}). Each of the $n$ roles of an $n$-ary predicate is connected to an object type that plays the specific role in this predicate. Furthermore a model can contain constraints (section~\ref{sec:constraints}), subtypes (section~\ref{sec:subtyping}), and other features (section~\ref{sec:additionalfeatures}). \tkzorm also allows you to change the appearance of ORM diagrams (section~\ref{sec:generalstyles}).
 
 \begin{figure}[ht]
   \begin{tikzpicture}
@@ -87,8 +87,8 @@ This style is to be used with nodes that represent value types.
 \end{stylekey}
 
 \begin{stylekey}{every entity}
-\stylekeyheadline{every value}
-Each of this styles is envoked by the styles |entity| or |value|. Change one of this styles to change the appearance of entity or value types.
+\stylekeyheadline[]{every value}
+Each of this styles is envoked by the styles \sty{entity} or \sty{value}. Change one of this styles to change the appearance of entity or value types.
 \begin{codeexample}[width=3cm]
 \begin{tikzpicture}[
   every entity/.style={draw=blue!50,fill=blue!20},
@@ -99,11 +99,11 @@ Each of this styles is envoked by the styles |entity| or |value|. Change one of 
 \end{codeexample}
 \end{stylekey}
 
-\begin{stylekey}{every object type}
-  This style is envoked by the styles |entity| and |value|. Change this style to change the common appearance of entity and value types.
+\begin{stylekey}{every object}
+  This style is envoked by the styles \sty{entity} and \sty{value}. Change this style to change the common appearance of entity and value types.
 \begin{codeexample}[width=3cm]
 \begin{tikzpicture}[
-  every object type/.style={shape=circle}]
+  every object/.style={shape=circle}]
   \node[entity] (P) at (0,0) {Person};
   \node[value]  (N) at (1.5,0) {Name};
 \end{tikzpicture}
@@ -125,33 +125,35 @@ Inside |{tikzpicture}| this is an abbreviation for |\node[value]|.
 
 \section{Predicates and Roles}
 \label{sec:predicates}\index{predicates}\index{roles}
-The relationship parts (\emph{roles}) played by objects are shown as boxes of fixed size (4mm$\times$2.5mm). A \emph{predicate} is a sequence of one or more concatenated role boxes. Predicates can be created with the following styles:
+Relationship parts (\emph{roles}) played by objects are shown as boxes of fixed size (4mm$\times$2.5mm). A \emph{predicate} is a sequence of one or more concatenated role boxes. Predicates can be created with the following styles:
 
 \begin{stylekey}[\opt{\meta{number of roles}}]{roles}
-\stylekeyheadline[ (alias for \texttt{roles=1})]{role}
+\stylekeyheadline[\opt{1}]{role}
 Shapes the current node as predicate with a given number of role boxes. Numbers from 1 to 20 are supported. The default value is 2 (binary).
 
 \begin{codeexample}[]
 \begin{tikzpicture}[orm]
-  \entity (A) {A};
-  \entity (B) at (2.8,0) {B}
+  \entity (A) at (0,1) {A};
+  \entity (B) at (2.8,1) {B}
           edge node[roles=3] (p) {} (A);
-  \entity (C) at (1.4,-1) {C}
-          edge (p.south);
-  \node[role] at (2.2,-1){} edge (C);
+  \entity (C) at (1.4,0) {C} edge (p.south);
+  \node[role] at (2.2,0){} edge (C);
   \draw (A) |- node[roles,xshift=2mm]{} (C);
 \end{tikzpicture}
 \end{codeexample}
 \end{stylekey} % roles
 
 \begin{stylekey}[\opt{\meta{number of roles}}]{vroles}
-\stylekeyheadline[ (alias for \texttt{vroles=1})]{vrole}
+\stylekeyheadline[\opt{1}]{vrole}
 Shapes the current node as predicate rotated by 90 degree (vertical).
 \end{stylekey} % vroles
 
 \begin{stylekey}{relation}
-  \stylekeyheadline[]{relationship}
-  This styles are to be used with connection lines between objects and roles. By default it just sets the line width to 0.25mm by including the style |every orm line|. Alternatively of using this style you can enable the general style |orm| (see section~\ref{sec:generalstyles}) and just draw a normal line.
+\stylekeyheadline[]{relationship}
+\stylekeyheadline[]{plays}
+  This equivalent styles are to be used with connection lines between objects and roles. By default it just includes the style \sty{every orm line} which results in a solid, black line of 0.25mm width.
+% Alternatively of using this style you can enable the general style \sty{orm}
+% (see section~\ref{sec:generalstyles}) and just draw a normal line.
 \begin{codeexample}[width=3cm]
 \begin{tikzpicture}
   \node[entity] (A) {A};
@@ -163,11 +165,11 @@ Shapes the current node as predicate rotated by 90 degree (vertical).
 \end{stylekey}
 
 \noindent
-Table~\ref{tab:roleabbr} lists abbreviations that can be used for creating predicate nodes and relationship lines inside |{tikzpicture}|.
+The following table lists abbreviations that can be used for creating predicate nodes and relationship lines inside |{tikzpicture}|:
 
-\begin{table}[h]
+\begin{table}[ht]
 \begin{tabular}{lll}
-\textbf{Command(s)} & \textbf{Abbreviation for} & \\
+\textbf{command(s)} & \textbf{abbreviation for} & \\
 \commandentry{unary} or \commandentry{role} & |\node[role]| & 
   \colorbox{graphicbackground}{\tikz \unary{};} \\
 \commandentry{binary} or \commandentry{roles} & |\node[roles]| &
@@ -187,14 +189,12 @@ Table~\ref{tab:roleabbr} lists abbreviations that can be used for creating predi
 \commandentry{plays} & |\draw[relationship]| &
   \colorbox{graphicbackground}{\tikz \plays (0,0) -- (1,0);} \\
 \end{tabular}
-\caption{Abbreviations to create predicates, roles, and relationship lines}
-\label{tab:roleabbr}
 \end{table}
 
 \noindent The general style of predicates and roles can be modified by the following keys:
 
 \begin{stylekey}{every predicate}
-By changing this style you can modify the common appearance of predicates.
+Changing this style to modify the common appearance of predicates.
 \begin{codeexample}[width=3cm]
 \begin{tikzpicture}[
   every predicate/.style={draw=blue,fill=green!20}]
@@ -206,21 +206,19 @@ By changing this style you can modify the common appearance of predicates.
 \end{stylekey}
 
 \begin{stylekey}{every relationship}
-  This style is envoked by the style |relationship|. To change the appearance of explicit relationship lines you can change this style. Please keep in mind that nodes placed on a line by |node| in one operation inherit properties from  the line they refer to, so you should create relationship lines with |plays|.
+  This style is envoked by the style \sty{relationship}. To change the appearance of explicit relationship lines you can change this style. Please keep in mind that nodes placed on a line by |node| in one operation inherit properties from  the line they refer to, so you should create relationship lines with \cmd{plays}.
 \begin{codeexample}[width=3cm]
 \begin{tikzpicture}[orm,
   every relationship/.style={draw=blue,dotted}]
-  \entity (A) {A};
-  \binary (r) at (1,0) {};
-  \entity (B) at (2,0) {B};
-  \plays (A) -- (r) -- (B);
+  \entity (A) {A}; 
+  \plays (A) to node[roles]{} (2,0) node(B){B};
   \vunary at (0,-0.8) (r) {} edge[relation] (A);
 \end{tikzpicture}
 \end{codeexample}
 \end{stylekey}
 
 \noindent
-Predicates are drawn either horizontally (|roles|) or vertically (|vroles|) as nodes with one or more parts. Figure~\ref{fig:hanchors} shows some of the anchors. Vertical predicates are rotated by 90 degree so |north| is at the left, |west| is at the bottom etc.
+Predicates are drawn either horizontally (\sty{roles}) or vertically (\sty{vroles}) as nodes with one or more parts. Figure~\ref{fig:hanchors} shows some of the anchors. Vertical predicates are rotated by 90 degree so |north| is at the left, |west| is at the bottom etc.
 % TODO: define better anchors or anchor aliases (start=west, end=east, top=north, bottom=south, role 1=one north)
 
 \begin{figure}[h]
@@ -240,12 +238,12 @@ Predicates are drawn either horizontally (|roles|) or vertically (|vroles|) as n
        node[\placement] {\scriptsize\texttt{s.\anchor}};
 \end{tikzpicture}
 \end{codeexample}
-\label{fig:hanchors}
 \caption{Node anchors of an ORM predicate}
+\label{fig:hanchors}
 \end{figure}
 
 \noindent
-The verbalization of a predicate can be given as |label| next to a predicate. For binary relationships forward and inverse readings can be seperated by a slash. To show the inverse reading, add an arrow tip with the commands |\ormleft| or |\ormup| (see section~\ref{sec:ormtext}). Labels for predicates with more then two roles must contain three dots (|\ldots|) for each inner role. Role names and indices can be added by different styles.
+The verbalization of a predicate can be given as |label| next to a predicate. For binary relationships forward and inverse readings can be seperated by a slash. To show the inverse reading, add an arrow tip with the commands \cmd{ormleft} or \cmd{ormup}. Labels for predicates with more then two roles must contain three dots (|\ldots|) for each inner role. Role names and indices can be added by different styles.
 % TODO: Show how to change label distance with style |label distance| :
 % \begin{tikzgraphic}[orm] % needed - there is no "every label/.style={orm}"
 % \node[role,label={R}] (r1) {};                    % put the label above
@@ -302,7 +300,7 @@ Adds a role index as small label at the $n$th role box (default: $n$).
 
 \section{Constraints}
 \label{sec:constraints}\index{Constraints}
-ORM provides a rich set of constraints: Mandatory constraints (section~\ref{sec:mandatoryconstraints}) and uniqueness constraints (section~\ref{sec:uniquenessconstraints}) limit the way objects can be combined in predicates. External constraints (section~\ref{sec:externalconstraints}) and subtype constraints (section~\ref{sec:subtyping}) involve multiple roles or object types. All constraints are displayed in magenta and either drawn directly at an object type or role, or linked to one or more object types or role with dotted or dashed lines or arrows (see the styles |limits| and |limits to|). ORM2 defines a set of symbols for external (section~\ref{sec:externalconstraints}), ring (section~\ref{sec:ringconstraints}) and other types of constraints. The general \textsc{tkz-orm} constraint key |constraint| only sets the font to violet. An optional key value can be used to add a predefined constraint symbol at the current position.
+ORM provides a rich set of constraints: Mandatory constraints (section~\ref{sec:mandatoryconstraints}) and uniqueness constraints (section~\ref{sec:uniquenessconstraints}) limit the way objects can be combined in predicates. External constraints (section~\ref{sec:externalconstraints}) and subtype constraints (section~\ref{sec:subtyping}) involve multiple roles or object types. All constraints are displayed in magenta and either drawn directly at an object type or role, or linked to one or more object types or role with dotted or dashed lines or arrows (see the styles \sty{limits} and \sty{limits to}). ORM2 defines a set of symbols for external (section~\ref{sec:externalconstraints}), ring (section~\ref{sec:ringconstraints}) and other types of constraints. The general \textsc{tkz-orm} constraint key \sty{constraint} only sets the font to violet. An optional key value can be used to add a predefined constraint symbol at the current position.
 
 \begin{stylekey}[\meta{color}]{constraintcolor}
 Changes the constraint color (default: |magenta!100|).
@@ -327,7 +325,7 @@ Draws a uniqueness constraint bar above one or more roles. All parts of the key 
 \end{stylekey}
 
 \begin{stylekey}[\opt{\meta{from}\texttt{-}\meta{to}\texttt{:}\meta{level}}]{skip unique}
-Draws a dotted uniqueness constraint bar. The syntax is the same as at the |unique| key.
+Draws a dotted uniqueness constraint bar. The syntax is the same as at the \sty{unique} key.
 The bar includes background color in the gaps between dots, so it can be drawn on top of 
 another bar.
 \begin{codeexample}[]
@@ -375,7 +373,7 @@ Please note that elementary $n$-ary predicates should only have uniqueness const
 
 \subsection{Mandatory Role Constraints}
 \label{sec:mandatoryconstraints}
-To indicate explicitly that a role is mandatory, a mandatory role dot is added to either end of the line that connects the role to its object. Usually it is placed at the object type end. This package defines the style key |constraint dot| (alias |cdot|) and the following keys which can be used to add mandatory role dots to lines drawn with the |to| operation.
+To indicate explicitly that a role is mandatory, a mandatory role dot is added to either end of the line that connects the role to its object. Usually it is placed at the object type end. This package defines the style key \sty{constraint dot} (alias \sty{cdot}) and the following keys which can be used to add mandatory role dots to lines drawn with the |to| operation.
 
 \begin{stylekey}{constraint dot}
 \stylekeyheadline[]{cdot}
@@ -387,7 +385,7 @@ Draws the current node as mandatory role dot.
 
 \begin{stylekey}{mandatory}
 \stylekeyheadline[]{required}
-This styles enables the |relationship| style and adds a mandatory role dot at the start of a straight line.
+This styles enables the \sty{relationship} style and adds a mandatory role dot at the start of a straight line.
 \begin{codeexample}[]
 \begin{tikzpicture}
   \entity (A) {A};
@@ -398,7 +396,7 @@ This styles enables the |relationship| style and adds a mandatory role dot at th
 \end{stylekey}
 
 \begin{stylekey}{required by}
-This styles enables the |relationship| style and adds a mandatory role dot at the end of a straight line.
+This styles enables the \sty{relationship} style and adds a mandatory role dot at the end of a straight line.
 \begin{codeexample}[]
 \begin{tikzpicture}
   \entity (A) {A};
@@ -410,7 +408,7 @@ This styles enables the |relationship| style and adds a mandatory role dot at th
 
 \begin{stylekey}{both required}
 \stylekeyheadline[]{both mandatory}
-This styles enables the |relationship| style and adds mandatory role dots at both ends of a straight line.
+This styles enables the \sty{relationship} style and adds mandatory role dots at both ends of a straight line.
 \begin{codeexample}[]
 \begin{tikzpicture}
   \entity (A) {A};
@@ -426,7 +424,7 @@ This styles enables the |relationship| style and adds mandatory role dots at bot
 
 \subsection{External constraints}
 \label{sec:externalconstraints}
-External constraints span multiple roles that may come from different predicates. They are depicted by several circle symbols next the roles they limit, possibly linked to them with a dotted or dashed line (style |limits| and |limits to|). \tkzorm\ implements external constraint symbols as node shapes.
+External constraints span multiple roles that may come from different predicates. They are depicted by several circle symbols next the roles they limit, possibly linked to them with a dotted or dashed line (style \sty{limits} and \sty{limits to}). \tkzorm\ implements external constraint symbols as node shapes.
 
 \begin{stylekey}[\opt{\meta{constraint type}}]{constraint}
   This style sets the font to ORM style on constraint color (violet). If you provide a constraint type as key value, the current node is shaped as constraint circle and the symbol of the specified constraint type is drawn. The most common constraint types are |exclusive| (alias |x|) to indicate that populations of two or more role-sequences must be mutually exclusive, |mandatory| (alias |required|, |total|, and |or|) to indicate that each at least on of two more roles must be played by an object type, and |xor| (alias |partition|) to indicates that exactely one of two or more roles must be played by an object type. These constraints can also be used in subtyping (section~\ref{sec:subtyping}). The constraint type |unique| and |preferred unique| enforces combinations of object types that play a given set of roles to always be the same. The types |equal|, |subset|, and |supset| indicate that tuples of roles have to be equal, subset or superset compared to each other (|supset| is not included in standard ORM2). The constraint type is |external| only draws the circle and can be used for custom constraints.
@@ -476,7 +474,7 @@ External constraints span multiple roles that may come from different predicates
 \end{stylekey}
 
 \begin{stylekey}{limits to}  % TODO: add optional parameter
-This style is to be used with directed lines that connect constraint circles and roles. The line is drawn in the same style as |limits| but dashed and with an arrow tip of style \arrowtip{orm arrow} at the head.
+This style is to be used with directed lines that connect constraint circles and roles. The line is drawn in the same style as \sty{limits} but dashed and with an arrow tip of style \arrowtip{orm arrow} at the head.
 \begin{codeexample}[width=3.4cm]
 \begin{tikzpicture}[orm]
   \unary[index=2] (a) at (0,0) {};
@@ -503,11 +501,12 @@ Inside |{tikzpicture}| these commands can be used as abbreviations for
 \end{command}
 
 \begin{command}[\marg{constraint type name}\marg{path code}]{constraintdeclare}
-  This command declares a new constraint type. The \marg{path code} is passed to the |append after command| key to be drawn after the constraint circle. Unless you want to extend ORM you do not need to declare new constraint types.
+  This command declares a new constraint type. The \marg{path code} is passed to the |append after command| key to be drawn after the constraint circle. Unless you want to extend ORM you do not need to declare new constraint types. This command is for internal use only!
 \end{command}
 
 \begin{command}[\marg{alias name}\marg{existing constraint type name}]{constraintdeclarealias}
   This command can be used to create an alias (another name) for an existing constraint type.
+  This command is for internal use only!
 \end{command}
 
 \begin{stylekey}{every constraint}
@@ -554,7 +553,7 @@ Value constraints, cardinality constraints, and occurrence frequencies can simpl
 \end{tikzpicture}
 \end{codeexample}
 
-\noindent A \textbf{Value constraint} indicates which values are allowed in an object type or role. It can be defined by declaring the set of possible values enclosed in curly brackets next to an object or role type. The command |\ormbraces| is a handy abbreviation to create curly brackets.
+\noindent A \textbf{Value constraint} indicates which values are allowed in an object type or role. It can be defined by declaring the set of possible values enclosed in curly brackets next to an object or role type. The commands \cmd{ormbraces} and \cmd{ormvalues} are handy abbreviations to create curly brackets.
 \index{value constraints}\index{constraints!values}
 
 \begin{codeexample}[]
@@ -672,7 +671,7 @@ Draws a subtype relationship arrow from the supertype to the subtype.
 \end{stylekey}
 
 \begin{stylekey}{suptype}
-Works in the same way as |subtype| but with reverse direction.
+Works in the same way as \sty{subtype} but with reverse direction.
 \begin{codeexample}[]
 \begin{tikzpicture}
   \node[entity] (A) {Animal};
@@ -684,7 +683,7 @@ Works in the same way as |subtype| but with reverse direction.
 
 \noindent Multiple inheritance may require to select one path as primary.
 You can distinguish primary and secondary subtypes by drawing the latter
-with a dashed arrow (|subinterface| or |supinterface|).
+with a dashed arrow (\sty{subinterface} or \sty{supinterface}).
 
 \begin{stylekey}{subinterface}
 \stylekeyheadline[]{supinterface}
@@ -726,7 +725,7 @@ Subtype constraints can be shown linked to the subtype arrrows:
 Sometimes an object type or predicate is referred to without describing all its details because it is defined in an external model or because it is shown duplicated at some other place in the same model. To indicate such an external or duplicated object type or a predicate, a shadow is added to its shape. Alternatively ORM2 allows to add a circumflex ``\^{}'' to an object type's name. A different kind of redundancy are roles and constraints that deduce from other parts of the model. ORM2 includes the possibility to shade redundant roles. This is useful for instance to show conceptual pathes or join fact types that are normally excluded. Moreover ORM allows a \emph{zooming} on object types. This means that only objects and roles connected to a given object type are shown.
 
 \begin{stylekey}{duplicated model}
-This style modifies the styles |every orm object| and |every predicate| so all object types and predicates in the current scope get a shadow.
+This style modifies the styles \sty{every object} and \sty{every predicate} so all object types and predicates in the current scope get a shadow.
 \begin{codeexample}[]
 \begin{tikzpicture}[orm]
   \begin{scope}[duplicated model]
@@ -736,13 +735,13 @@ This style modifies the styles |every orm object| and |every predicate| so all o
     \draw[relationship] (A) -- (r1);
   \end{scope}
   \entity (B) [right=of r2] {B\^{}};
-  \draw[orm] (r2) -- (B);
+  \plays (r2) -- (B);
 \end{tikzpicture}
 \end{codeexample}
 \end{stylekey} % duplicated model
 
 \begin{stylekey}{implied model}
-  This style modifies the styles |every orm line| and |every orm object| in the current scope to draw all lines thin and all objects filled gray.
+  This style modifies the styles \sty{every orm line} and \sty{every object} in the current scope to draw all lines thin and all objects filled gray.
   The style is currently broken.
 \begin{figure}[h]
 \centering
@@ -765,7 +764,7 @@ This style modifies the styles |every orm object| and |every predicate| so all o
 
 \begin{stylekey}{duplicated}
 \stylekeyheadline[]{implied}
-This styles work like |duplicated model| and |implied model| but only affect the current element.
+This styles work like \sty{duplicated model} and \sty{implied model} but only affect the current element.
 The style are currently broken.
 \begin{codeexample}[]
 \begin{tikzpicture}
@@ -806,8 +805,8 @@ can be modified by other styles.
   \entity[label=above:implicit] (i) {idot}; \\
   \entity[label=left:deontic,right] (o) {odot}; &
   \entity (io) {iodot}; \\ };
-\draw[mdot-idot] (m) to (i);
-\draw[odot-iodot] (o) to (io);
+  \plays[mdot-idot] (m) to (i);
+  \plays[odot-iodot] (o) to (io);
 \end{tikzpicture}
 \end{codeexample}
 
@@ -821,27 +820,31 @@ Sets the font to the same sans-serif variant which is used in ORM diagrams.
 \end{command}
 
 \begin{command}{ormbf}
-Sets the font to a bold variant of |\ormtext|.
+Sets the font to a bold variant of \cmd{ormtext}.
 \end{command}
 
 \begin{command}{ormc}
-Sets the font to a |\ormtext| in constraint color.
+Sets the font to a \cmd{ormtext} in constraint color.
 \end{command}
 
 \begin{command}[\marg{text}]{ormsup}
-Puts some text in a superscript variant of |\ormtext|.
+Puts some text in a superscript variant of \cmd{ormtext}.
 \end{command}
 
 \begin{command}[\marg{text}]{ormsub}
-Puts some text in a subscript variant of |\ormtext|.
+Puts some text in a subscript variant of \cmd{ormtext}.
 \end{command}
 
 \begin{command}[\marg{text}]{ormind}
-Puts some text in a superscript variant of |\ormbf|.
+Puts some text in a superscript variant of \cmd{ormbf}.
 \end{command}
 
 \begin{command}[\marg{text}]{ormbraces}
-Puts some text as |\ormtext| in braces.
+Puts some text as \cmd{ormtext} in braces.
+\end{command}
+
+\begin{command}[\marg{text}]{ormvalues}
+Puts some text as \cmd{ormc} in braces in constraint color.
 \end{command}
 
 \begin{codeexample}[]
@@ -880,9 +883,8 @@ Puts some text as |\ormtext| in braces.
 
 \ifappendix
   \bibliographystyle{alpha}
-  \addcontentsline{toc}{section}{References}
+  \addcontentsline{toc}{section}{References and Index}
   \bibliography{tkz-orm}
-  \addcontentsline{toc}{section}{Index}
   \printindex
 \fi
 

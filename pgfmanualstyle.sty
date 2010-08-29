@@ -168,6 +168,8 @@
 % code from various pgf/tikz source files and own modifications or additions
 %<–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––>
 
+\newcommand{\bfhref}[1]{\textbf{\hyperpage{#1}}}
+
 \newenvironment{pgfmanualentry}{\list{}{\leftmargin=2em\itemindent-\leftmargin\def\makelabel##1{\hss##1}}}{\endlist}
 \newcommand\pgfmanualentryheadline[1]{\itemsep=0pt\parskip=0pt\item\strut{#1}\par\topsep=0pt}
 \newcommand\pgfmanualbody{\parskip3pt}
@@ -184,7 +186,8 @@
   \else%
   \texttt{=}#1%
   \fi%
-  \index{#2@\texttt{#2} key}}%
+  \index{#2@\texttt{#2} key|bfhref}}%
+  \phantomsection\label{sty:#2}%
 }
 
 \newenvironment{stylekey}[2][]{
@@ -194,9 +197,18 @@
 }{
   \end{pgfmanualentry}
 }
+\newcommand{\sty}[1]{%
+  \expandafter\hyperref[sty:#1]{\texttt{#1}}%
+  \index{#1@\texttt{#1} key}%
+}
 \newcommand{\commandentry}[2][]{%
   \texttt{\color{darkred}\textbackslash #2}#1%
-  \index{#2@\texttt{\textbackslash #2}}
+  \index{#2@\texttt{\textbackslash #2}|bfhref}%
+  \phantomsection\label{cmd:#2}
+}
+\newcommand{\cmd}[1]{%
+  \expandafter\hyperref[cmd:#1]{\texttt{\textbackslash #1}}  
+  \index{#1@\texttt{\textbackslash #1}}
 }
 \newenvironment{command}[2][]{
   \begin{pgfmanualentry}

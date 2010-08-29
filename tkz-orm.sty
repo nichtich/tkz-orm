@@ -84,6 +84,7 @@
 \def\ormsub#1{\orm@textsubscript{\orm@font@scriptsize #1}}
 \def\ormind#1{\textsuperscript{\orm@font@bold@scriptsize #1}}
 \def\ormbraces#1{{\orm@font\textbraceleft#1\textbraceright}}
+\def\ormvalues#1{\ormc{\ormbraces{#1}}}
 
 \def\ormleft#1{{\ormarrowleft\ormtext #1}}
 \def\ormup#1{{\ormtext #1\ormarrowup}}
@@ -103,10 +104,10 @@
 \pgfkeys{/tikz/constraint color/.style={constraint stroke=#1,constraint fill=#1}}
 
 
-\tikzstyle{every orm line}=         [solid,draw,line width=\orm@linewidth]
+\tikzstyle{every orm line}=         [solid,draw=black,line width=\orm@linewidth,-]
 \tikzstyle{orm}=                    [font=\orm@font,node distance=4mm,
                                      %label distance=1.5mm,
-                                     line width=\orm@linewidth,
+                                     %line width=\orm@linewidth,
                                      label distance=1.25mm
                                     ]
 
@@ -114,21 +115,22 @@
 
 \tikzstyle{zoomed}=                 [line width=\orm@linewidth*1.5]
 
-\tikzstyle{every object type}=      []
+\tikzstyle{every object}=           []
 \tikzstyle{every entity}=           []
 \tikzstyle{entity}=                 [every orm,
                                      shape=rectangle,rounded corners,
                                      align=center,minimum size=6mm,
-                                     every object type,every entity]
+                                     every object,every entity]
 
 \tikzstyle{every value}=            []
 \tikzstyle{value}=                  [every orm,
                                      shape=rectangle,rounded corners,densely dashed,
                                      align=center,minimum size=6mm,
-                                     every object type,every value]
+                                     every object,every value]
 
 
 \tikzstyle{relationship}=           [every orm line,every relationship]
+\tikzstyle{relation}=               [relationship]
 \tikzstyle{relation}=               [relationship]
 \tikzstyle{every relationship}=     []
 
@@ -344,19 +346,20 @@
 
 
 %%%% Constraint symbols
-\tikzstyle{every constraint}=       [draw=constraintcolor]
-\tikzstyle{every constraint line}=  [line width=\orm@linewidth,draw=constraintcolor,solid]
+\tikzstyle{every constraint}=       []
+% TODO: every uniqueness bar
+\tikzstyle{every constraint line}=  [every orm line,draw=constraintcolor,every constraint]
+%\tikzstyle{every constraint line}=  [line width=\orm@linewidth,draw=constraintcolor,solid]
 \tikzstyle{every constraint circle}=[]
-\tikzstyle{constraint circle}=      [every orm,every constraint,
+\tikzstyle{constraint circle}=      [every orm,every constraint line,
                                      shape=circle,
                                      font=\orm@font@scriptsize,
                                      minimum size=4mm,,inner sep=0pt,
                                      every constraint circle]
 \tikzstyle{constraint no circle}=   [constraint circle,draw=none,fill=none]
 
-\tikzstyle{limits}=                 [line width=\orm@linewidth,draw=constraintcolor,dotted]
-\tikzstyle{limits to}=              [line width=\orm@linewidth,draw=constraintcolor,dashed,
-                                     color=constraintcolor,-orm arrow]
+\tikzstyle{limits}=                 [every constraint line,dotted]
+\tikzstyle{limits to}=              [every constraint line,dashed,-orm arrow]
 
 
 % internal uniqueness constraint
@@ -478,7 +481,7 @@
 %\tikzstyle{entity}=                 [every orm,
 %                                     shape=rectangle,rounded corners,
 %                                     align=center,minimum size=6mm,
-%                                     every object type,every entity]
+%                                     every object,every entity]
 \tikzset{constraint/text/.style={color=constraintcolor,font=\orm@font,align=center}}
 
 \tikzset{constraint/.default=text}
@@ -676,9 +679,9 @@
 %
 \pgfkeys{
   /orm/external constraint/.style={
-    draw=constraintcolor,
+    every constraint line,
     fill=white,text=constraintcolor,align=center,
-    font=\orm@font@scriptsize,minimum size=4mm,inner sep=0pt,
+    font=\orm@font@scriptsize,minimum size=4mm,inner sep=0pt
   }
 }
 
