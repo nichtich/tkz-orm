@@ -11,7 +11,7 @@
 % Copyright 2009-2010 by Jakob Voss
 %<–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––>
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{tkz-orm}[2010/08/11 v0.1dev Object-Role Modeling]
+\ProvidesPackage{tkz-orm}[2011/02/21 v0.1.2 Object-Role Modeling]
 %<–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––>
 \RequirePackage{tikz}[2009/09/04]
 
@@ -131,7 +131,7 @@
 
 \tikzstyle{relationship}=           [every orm line,every relationship]
 \tikzstyle{relation}=               [relationship]
-\tikzstyle{relation}=               [relationship]
+\tikzstyle{plays}=                  [relationship]
 \tikzstyle{every relationship}=     []
 
 
@@ -164,6 +164,8 @@
 \tikzaddtikzonlycommandshortcutdef{\limits}{\draw[limits]}
 \tikzaddtikzonlycommandshortcutdef{\limited}{\draw[limits]}
 \tikzaddtikzonlycommandshortcutdef{\limitsto}{\draw[limits to]}
+
+\tikzaddtikzonlycommandshortcutdef{\constraint}{\node[text=constraintcolor]}
 
 %%%% Textual rules
 
