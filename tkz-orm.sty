@@ -82,7 +82,7 @@
 \def\ormc{\orm@font\color{constraintcolor}}
 \def\ormsup#1{\textsuperscript{\orm@font@scriptsize #1}}
 \def\ormsub#1{\orm@textsubscript{\orm@font@scriptsize #1}}
-\def\ormind#1{\textsuperscript{\orm@font@bold@scriptsize #1}}
+\def\ormind#1{\textsuperscript{\orm@font@bold@scriptsize\color{constraintcolor} #1}}
 \def\ormbraces#1{{\orm@font\textbraceleft#1\textbraceright}}
 \def\ormvalues#1{\ormc{\ormbraces{#1}}}
 
@@ -172,7 +172,7 @@
     \bgroup%
       [current point is local=true]
       (\tikzlastnode.north west) node[font=\orm@font@bold@scriptsize,
-         anchor=north east,inner sep=0] {#1}
+         anchor=north east,inner sep=0,text=constraintcolor] {#1}
     \egroup%
   },
   orm,inner sep=0.5mm,
