@@ -515,6 +515,17 @@
   \draw[every constraint line] (270:0mm) to (270:1.75mm);
 }
 
+% TODO: document
+\constraintdeclareasnode{strongly intransitive}{
+  \fill[every constraint line,fill=white,draw=white] circle (2.2mm);
+  \path [ormdot]  (90:2mm) circle;
+  \path [ormdot]  (30:1mm) circle;
+  \path [ormdot] (210:2mm) circle;
+  \path [ormdot] (330:2mm) circle;
+  \path[every constraint line,rounded corners=0] (90:2mm) -- (210:2mm) -- (330:2mm) -- (90:2mm);
+  \draw[every constraint line] (270:0mm) to (270:1.75mm);
+}
+
 % TODO: document tree and otree
 \constraintdeclareasnode{tree}{
   \fill[every constraint line,fill=white,draw=white] circle (2.2mm);
