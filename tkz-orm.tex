@@ -13,8 +13,8 @@
 \usepackage{makeidx}
 \makeindex
 
-\def\ormVersion{0.1.2}
-\def\ormDate{February 21th, 2011}
+\def\ormVersion{0.1.3}
+\def\ormDate{December 5th, 2011}
 \newif\ifappendix
 \appendixfalse
 \appendixtrue
@@ -517,15 +517,27 @@ Inside |{tikzpicture}| these commands can be used as abbreviations for
 \subsection{Ring Constraints}
 \label{sec:ringconstraints}
 
-A ring constraint can be applied to any two roles of a predicate that are played by the same object type (or the same supertype). Such constraints can also be viewed as properties of a binary relation or as properties of a directed graph. This package provides the following symbols to depict ring constraints. The graphical syntax of some symbols is slightly changed compared to the official ORM2 syntax and the two symbols for `asymmetric and intransitive', and for `symmetric and intransitive' have been omitted because of complexity.
+A ring constraint can be applied to any two roles of a predicate that are
+played by the same object type (or the same supertype). Such constraints can
+also be viewed as properties of a binary relation or as properties of a
+directed graph. There are 10 ring constraints that combined can be used in 26
+forms. The graphical syntax of `irreflexive' and `antisymmetric' provided by
+this package are slightly changed compared to the official ORM2 syntax and
+some combinations are omitted or changed.
 
-% TODO: additional: transitive, tree
+%and the two symbols for `asymmetric and
+%intransitive', and for `symmetric and intransitive' have been omitted because
+%of complexity.
+
+% TODO: additional: tree, otree
+% combined: acyclic intransitive, symmetric irreflexive etc.
 \begin{codeexample}[]
 \centering
 \begin{tikzpicture}[orm]
-  \foreach \n/\s in {0/irreflexive,1/asymmetric,2/intransitive,
+  \foreach \n/\s in {0/irreflexive,1/asymmetric,2/strongly intransitive,
                      3/antisymmetric,4/acyclic,5/acyclic intransitive,
-                     6/symmetric,7/purely reflexive,8/symmetric irreflexive}{
+                     6/symmetric,7/purely reflexive,8/symmetric irreflexive,
+					 9/intransitive,10/reflexive,11/transitive}{
     \path ($mod(\n,3)*(3.4,0)-int(\n/3)*(0,0.8)$) node [constraint=\s] {}
          +(4mm,0) node[anchor=west] {\s}; };
 \end{tikzpicture}
@@ -536,7 +548,7 @@ A ring constraint can be applied to any two roles of a predicate that are played
 \entity (P) {Person};
 \binary[below=of P,unique=2,label=below:mother of] (r) {};
 \plays (P) to (r.one north) (P) to (r.two north);
-\limits (r.north) to +(-1,0.4) node[constraint=acyclic intransitive]{};
+\limits (r.north) to +(-1,0.4) node[constraint=acyclic]{};
 \end{tikzpicture}
 \end{codeexample}
 
