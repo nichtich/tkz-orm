@@ -21,6 +21,7 @@
 \usetikzlibrary{shadows}
 \usetikzlibrary{positioning}
 \usetikzlibrary{calc}
+\usetikzlibrary{fit}
 
 \makeatletter
 
@@ -238,10 +239,6 @@
   %\pgfsetfillcolor{\pgfkeysvalueof{/tkzorm/constraintfill}}
   \pgfusepathqfillstroke
 }
-
-% new arrow heads >dot and dot<
-\pgfarrowsdeclarecombine[-3\pgflinewidth]{>dot}{>dot}{to}{to}{dot}{dot}
-\pgfarrowsdeclarecombine[-3\pgflinewidth]{dot<}{dot<}{to}{to}{dot}{dot}
 
 % mandatory constraint dot arrow head
 \pgfarrowsdeclare{mdot}{mdot}{
@@ -984,6 +981,17 @@
     \pgfpathmoveto{\pgfqpoint{\pgf@xa}{\pgf@yb}}%
     \pgfpathlineto{\pgfqpoint{\pgf@xb}{\pgf@yb}}%
  }
+}
+
+
+% Power types
+\tikzset{power/.style args={#1}{
+        append after command={
+            \pgfextra{
+                \node[entity,fit={(\tikzlastnode)},label={[font=\orm@font]#1}] at (\tikzlastnode) (\tikzlastnode-power) {};
+            }
+        }
+    }
 }
 
 

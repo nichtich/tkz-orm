@@ -86,6 +86,17 @@ This style is to be used with nodes that represent value types.
 \end{codeexample}
 \end{stylekey}
 
+\begin{stylekey}{power}
+This style is to be used with nodes that represent power types.
+\begin{codeexample}[]
+\begin{tikzpicture}
+  \node[entity,power] {A};
+  \node[entity,power=Bs] at (1.1,0) {B};
+  \node[entity,power=below:Cs] at (2.2,0) {C};
+\end{tikzpicture}
+\end{codeexample}
+\end{stylekey}
+
 \begin{stylekey}{every entity}
 \stylekeyheadline[]{every value}
 Each of this styles is envoked by the styles \sty{entity} or \sty{value}. Change one of this styles to change the appearance of entity or value types.
@@ -156,9 +167,9 @@ Shapes the current node as predicate rotated by 90 degree (vertical).
 % (see section~\ref{sec:generalstyles}) and just draw a normal line.
 \begin{codeexample}[width=3cm]
 \begin{tikzpicture}
-  \node[entity] (A) {A};
+  \node[entity,power] (A) {A};
   \node[roles] (r) at (1,0) {};
-  \draw[relation] (A) -- (r);
+  \draw[relation] (A-power) -- (r);
   \node[vrole] at (0,-.8){} edge[relation] (A);
 \end{tikzpicture}
 \end{codeexample}
