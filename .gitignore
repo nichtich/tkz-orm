@@ -18,3 +18,11 @@
 *.ilg
 *.ind
 
+# package file
+tkz-orm.zip
+
+# example sources
+examples/*.tex
+
+# temporary directory
+newxamples
