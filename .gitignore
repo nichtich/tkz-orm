@@ -4,19 +4,31 @@
 
 # temporary (La)TeX files
 *.aux
+*.glo
+*.idx
+*.fdb_latexmk
+*.fls
 *.log
+*.toc
+*.ist
+*.acn
+*.acr
+*.alg
 *.bbl
 *.blg
 *.dvi
-*.ist
-*.glo
-*.gls
 *.glg
-*.toc
-*.out
-*.idx
+*.gls
 *.ilg
 *.ind
+*.lof
+*.lot
+*.maf
+*.mtc
+*.mtc1
+*.out
+*.swp
+*.synctex.gz
 
 # examples
 examples/*.png
