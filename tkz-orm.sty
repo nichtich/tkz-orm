@@ -8,7 +8,7 @@
 % 1. under the LaTeX Project Public License and/or
 % 2. under the GNU Public License.
 %
-% Copyright 2009-2010 by Jakob Voss
+% Copyright 2009-2016 by Jakob Voss, Camil Staps
 %<–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––>
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{tkz-orm}[2011/12/05 v0.1.3 Object-Role Modeling]
@@ -111,9 +111,8 @@
                                      %line width=\orm@linewidth,
                                      label distance=1.25mm
                                     ]
-\tikzstyle{orm-compact}=            [orm,
-                                     every entity/.style={shape=rectangle,rounded corners},
-                                     every value/.style={shape=rectangle,rounded corners}
+\tikzstyle{orm-spacious}=           [orm,
+                                     every object/.style={shape=circle}
                                     ]
 
 \tikzstyle{every orm}=              [every orm line,fill=white,orm]
@@ -123,13 +122,13 @@
 \tikzstyle{every object}=           []
 \tikzstyle{every entity}=           []
 \tikzstyle{entity}=                 [every orm,
-                                     shape=circle,
+                                     shape=rectangle,rounded corners,
                                      align=center,minimum size=6mm,
                                      every object,every entity]
 
 \tikzstyle{every value}=            []
 \tikzstyle{value}=                  [every orm,
-                                     shape=circle,densely dashed,
+                                     shape=rectangle,rounded corners,densely dashed,
                                      align=center,minimum size=6mm,
                                      every object,every value]
 
@@ -1003,7 +1002,7 @@
 \tikzset{sequence/.style args={#1}{
         append after command={
             \pgfextra{
-                \node[entity,shape=rectangle,fit={(\tikzlastnode)},label={[font=\orm@font]#1}] at (\tikzlastnode) (\tikzlastnode-power) {};
+                \node[entity,shape=rectangle,rounded corners=0pt,fit={(\tikzlastnode)},label={[font=\orm@font]#1}] at (\tikzlastnode) (\tikzlastnode-sequence) {};
             }
         }
     }

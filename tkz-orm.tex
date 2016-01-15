@@ -23,7 +23,7 @@
 %% Beginning of the documentation
 % --------------------------------------------------------------
 \title{The \tkzorm\ package\\Object-Role Model Drawing Library}
-\author{Jakob Vo\ss\\{\footnotesize jakob.voss@gbv.de}}
+\author{Jakob Vo\ss\footnote{jakob.voss@gbv.de}, Camil Staps\footnote{info@camilstaps.nl}}
 \date{Version \ormVersion\\\ormDate\\[5mm]\url{http://purl.org/net/tkz-orm}}
 
 \begin{document}
@@ -65,7 +65,7 @@ Object-Role Modeling (ORM)\footnote{See \url{http://www.orm.net/}.} is a fact-or
 \pagebreak
 \section{Object Types}
 \label{sec:objecttypes}\index{Object types}\index{Entities}\index{Values}
-Object types are drawn as circles. The object's type name is written as node text inside. \emph{Entity types} use solid border lines and \emph{value types} use dashed border lines. The minimal size of an object is set to 6mm$\times$6mm. This package provides the following styles for entities and values:
+Object types are drawn as rectangles with rounded borders. The object's type name is written as node text inside. \emph{Entity types} use solid border lines and \emph{value types} use dashed border lines. The minimal size of an object is set to 6mm$\times$6mm. This package provides the following styles for entities and values:
 
 \begin{stylekey}{entity}
 This style is to be used with nodes that represent entity types.
@@ -647,7 +647,7 @@ Matrices are useful to draw multiple textual rules below each other.
 \begin{figure}[h]
 \centering
 \begin{codeexample}[]
-\begin{tikzpicture}[orm-compact]
+\begin{tikzpicture}
   \entity (E) {Employee\ormind{1}\\(.nr)};
   \binary[left=of E.north west,unique=2,label=\ormleft{has}] (h) {};
   \binary[left=of E.south west,unique=1-2,
@@ -895,10 +895,10 @@ Puts some text as \cmd{ormc} in braces in constraint color.
   This style sets the font and line width and the default node distance
 \end{stylekey}
 
-\begin{stylekey}{orm-compact}
-  If the circles are too big for your document, you can typeset object types as rounded rectangles (as was the default in \tkzorm\ 0.1.3 and before), by using \texttt{orm-compact} instead of \texttt{orm}.
+\begin{stylekey}{orm-spacious}
+  If you prefer to have entities and labels typeset as circles, you can use \texttt{orm-spacious} instead of \texttt{orm}.
 \begin{codeexample}[width=3cm]
-\begin{tikzpicture}[orm-compact]
+\begin{tikzpicture}[orm-spacious]
   \node[entity] (P) at (0,0) {Person};
   \node[value]  (N) at (1.5,0) {Name};
 \end{tikzpicture}
@@ -922,7 +922,7 @@ Puts some text as \cmd{ormc} in braces in constraint color.
   \item[\ormVersion, \ormDate]
     Unstable developer version (at Github).
   \item[0.1.4, January 15, 2016]
-    Power types, sequence types, \texttt{orm-compact} added. Default style of objects changed from rounded rectangle to circle.
+    Power types, sequence types, \texttt{orm-spacious} added.
   \item[0.1, January 25, 2010]
     First release (at CTAN).
 \end{description}
