@@ -21,6 +21,7 @@
 \usetikzlibrary{shadows}
 \usetikzlibrary{positioning}
 \usetikzlibrary{calc}
+\usetikzlibrary{fit}
 
 \makeatletter
 
@@ -110,6 +111,10 @@
                                      %line width=\orm@linewidth,
                                      label distance=1.25mm
                                     ]
+\tikzstyle{orm-compact}=            [orm,
+                                     every entity/.style={shape=rectangle,rounded corners},
+                                     every value/.style={shape=rectangle,rounded corners}
+                                    ]
 
 \tikzstyle{every orm}=              [every orm line,fill=white,orm]
 
@@ -118,13 +123,13 @@
 \tikzstyle{every object}=           []
 \tikzstyle{every entity}=           []
 \tikzstyle{entity}=                 [every orm,
-                                     shape=rectangle,rounded corners,
+                                     shape=circle,
                                      align=center,minimum size=6mm,
                                      every object,every entity]
 
 \tikzstyle{every value}=            []
 \tikzstyle{value}=                  [every orm,
-                                     shape=rectangle,rounded corners,densely dashed,
+                                     shape=circle,densely dashed,
                                      align=center,minimum size=6mm,
                                      every object,every value]
 
@@ -238,10 +243,6 @@
   %\pgfsetfillcolor{\pgfkeysvalueof{/tkzorm/constraintfill}}
   \pgfusepathqfillstroke
 }
-
-% new arrow heads >dot and dot<
-\pgfarrowsdeclarecombine[-3\pgflinewidth]{>dot}{>dot}{to}{to}{dot}{dot}
-\pgfarrowsdeclarecombine[-3\pgflinewidth]{dot<}{dot<}{to}{to}{dot}{dot}
 
 % mandatory constraint dot arrow head
 \pgfarrowsdeclare{mdot}{mdot}{
@@ -984,6 +985,28 @@
     \pgfpathmoveto{\pgfqpoint{\pgf@xa}{\pgf@yb}}%
     \pgfpathlineto{\pgfqpoint{\pgf@xb}{\pgf@yb}}%
  }
+}
+
+
+% Power types
+\tikzset{power/.style args={#1}{
+        append after command={
+            \pgfextra{
+                \node[entity,shape=rectangle,rounded corners,fit={(\tikzlastnode)},label={[font=\orm@font]#1}] at (\tikzlastnode) (\tikzlastnode-power) {};
+            }
+        }
+    }
+}
+
+
+% Sequence types
+\tikzset{sequence/.style args={#1}{
+        append after command={
+            \pgfextra{
+                \node[entity,shape=rectangle,fit={(\tikzlastnode)},label={[font=\orm@font]#1}] at (\tikzlastnode) (\tikzlastnode-power) {};
+            }
+        }
+    }
 }
 
 

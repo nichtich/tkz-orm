@@ -13,8 +13,8 @@
 \usepackage{makeidx}
 \makeindex
 
-\def\ormVersion{0.1.3}
-\def\ormDate{December 5th, 2011}
+\def\ormVersion{0.1.4}
+\def\ormDate{January 15, 2016}
 \newif\ifappendix
 \appendixfalse
 \appendixtrue
@@ -49,11 +49,12 @@ This is the developer version of \tkzorm. Please send your comments to the autho
 Object-Role Modeling (ORM)\footnote{See \url{http://www.orm.net/}.} is a fact-oriented modeling language that evolved from the \textit{Natural-language Information Analysis Method} (NIAM) by G.M. Nijssen. The current version (ORM2) is mainly based on works of Terry Halpin. Like ERM, UML, and other data modeling languages ORM helps to identify and abstract information objects, relationships, and rules of a Universe of Discourse to be formalized and implemented on another level. ORM includes a graphical notation and a precise verbalization in natural language. Models can further be validated by populating fact tables with sample data. An overview of the ORM2 graphical notation is given in \cite{Halpin2005} and more details in \cite{Halpin2008}. An ORM model consists of object types (section~\ref{sec:objecttypes}) and predicates  (section~\ref{sec:predicates}). Each of the $n$ roles of an $n$-ary predicate is connected to an object type that plays the specific role in this predicate. Furthermore a model can contain constraints (section~\ref{sec:constraints}), subtypes (section~\ref{sec:subtyping}), and other features (section~\ref{sec:additionalfeatures}). \tkzorm also allows you to change the appearance of ORM diagrams (section~\ref{sec:generalstyles}).
 
 \begin{figure}[ht]
+  \centering
   \begin{tikzpicture}
     \entity (A) at (0,0) {A};
     \entity[right=of A] (blank) {};
     \value[right=of blank] (value) {Value type};
-    \entity[right=of value,text width=1.75cm] (fixedwidth) {Person with red hair};
+    \entity[right=of value] (fixedwidth) {Person};
     \entity[right=of fixedwidth] (tabular) {Activity\\(Code)};
     \entity[right=of tabular] (typenamelabel) {Type name\\(.reference)};
     \entity[right=of typenamelabel,zoomed] () {Zoomed};
@@ -64,7 +65,7 @@ Object-Role Modeling (ORM)\footnote{See \url{http://www.orm.net/}.} is a fact-or
 \pagebreak
 \section{Object Types}
 \label{sec:objecttypes}\index{Object types}\index{Entities}\index{Values}
-Object types are drawn as rectangles with rounded corners. The object's type name is written as node text inside. \emph{Entity types} use solid border lines and \emph{value types} use dashed border lines. The minimal size of an object is set to 6mm$\times$6mm. This package provides the following styles for entities and values:
+Object types are drawn as circles. The object's type name is written as node text inside. \emph{Entity types} use solid border lines and \emph{value types} use dashed border lines. The minimal size of an object is set to 6mm$\times$6mm. This package provides the following styles for entities and values:
 
 \begin{stylekey}{entity}
 This style is to be used with nodes that represent entity types.
@@ -86,6 +87,28 @@ This style is to be used with nodes that represent value types.
 \end{codeexample}
 \end{stylekey}
 
+\begin{stylekey}{power}
+This style is to be used with nodes that represent power types.
+\begin{codeexample}[]
+\begin{tikzpicture}
+  \node[entity,power=below:As] {A};
+  \node[entity,power=Bs] at (1.1,0) {B};
+  \node[entity,power] at (2.2,0) {C};
+\end{tikzpicture}
+\end{codeexample}
+\end{stylekey}
+
+\begin{stylekey}{sequence}
+This style is to be used with nodes that represent sequence types.
+\begin{codeexample}[]
+\begin{tikzpicture}
+  \node[entity,sequence=below:As] {A};
+  \node[entity,sequence=Bs] at (1.1,0) {B};
+  \node[entity,sequence] at (2.2,0) {C};
+\end{tikzpicture}
+\end{codeexample}
+\end{stylekey}
+
 \begin{stylekey}{every entity}
 \stylekeyheadline[]{every value}
 Each of this styles is envoked by the styles \sty{entity} or \sty{value}. Change one of this styles to change the appearance of entity or value types.
@@ -94,7 +117,7 @@ Each of this styles is envoked by the styles \sty{entity} or \sty{value}. Change
   every entity/.style={draw=blue!50,fill=blue!20},
   every value/.style={draw=green!50,fill=green!20}]
   \node[entity] (P) at (0,0) {Person};
-  \node[value]  (N) at (0,-1) {Name};
+  \node[value]  (N) at (1.5,0) {Name};
 \end{tikzpicture}
 \end{codeexample}
 \end{stylekey}
@@ -103,7 +126,7 @@ Each of this styles is envoked by the styles \sty{entity} or \sty{value}. Change
   This style is envoked by the styles \sty{entity} and \sty{value}. Change this style to change the common appearance of entity and value types.
 \begin{codeexample}[width=3cm]
 \begin{tikzpicture}[
-  every object/.style={shape=circle}]
+  every object/.style={shape=rectangle,draw=red}]
   \node[entity] (P) at (0,0) {Person};
   \node[value]  (N) at (1.5,0) {Name};
 \end{tikzpicture}
@@ -120,7 +143,6 @@ Inside |{tikzpicture}| this is an abbreviation for |\node[entity]|.
 \begin{command}{value}
 Inside |{tikzpicture}| this is an abbreviation for |\node[value]|.
 \end{command}
-
 
 
 \section{Predicates and Roles}
@@ -156,9 +178,9 @@ Shapes the current node as predicate rotated by 90 degree (vertical).
 % (see section~\ref{sec:generalstyles}) and just draw a normal line.
 \begin{codeexample}[width=3cm]
 \begin{tikzpicture}
-  \node[entity] (A) {A};
+  \node[entity,power] (A) {A};
   \node[roles] (r) at (1,0) {};
-  \draw[relation] (A) -- (r);
+  \draw[relation] (A-power) -- (r);
   \node[vrole] at (0,-.8){} edge[relation] (A);
 \end{tikzpicture}
 \end{codeexample}
@@ -255,10 +277,10 @@ The verbalization of a predicate can be given as |label| next to a predicate. Fo
 \centering
 \begin{codeexample}[]
 \begin{tikzpicture}[orm]
-  \entity at (0,2) (P) {Person};
-  \entity at (3,2) (C) {Car};
+  \entity at (0,3) (P) {Person};
+  \entity at (3,3) (C) {Car};
   \entity at (0,0) (L) {License};
-  \entity at (6.6,2) (M) {Maker};
+  \entity at (6.6,3) (M) {Maker};
   \unary[label=valid] at (1.2,0) (V) {} edge (L);
   \draw (P) to node[roles,
          label=below:drives,label=\ormleft{is driven by}]{} (C);
@@ -625,7 +647,7 @@ Matrices are useful to draw multiple textual rules below each other.
 \begin{figure}[h]
 \centering
 \begin{codeexample}[]
-\begin{tikzpicture}[orm]
+\begin{tikzpicture}[orm-compact]
   \entity (E) {Employee\ormind{1}\\(.nr)};
   \binary[left=of E.north west,unique=2,label=\ormleft{has}] (h) {};
   \binary[left=of E.south west,unique=1-2,
@@ -873,6 +895,16 @@ Puts some text as \cmd{ormc} in braces in constraint color.
   This style sets the font and line width and the default node distance
 \end{stylekey}
 
+\begin{stylekey}{orm-compact}
+  If the circles are too big for your document, you can typeset object types as rounded rectangles (as was the default in \tkzorm\ 0.1.3 and before), by using \texttt{orm-compact} instead of \texttt{orm}.
+\begin{codeexample}[width=3cm]
+\begin{tikzpicture}[orm-compact]
+  \node[entity] (P) at (0,0) {Person};
+  \node[value]  (N) at (1.5,0) {Name};
+\end{tikzpicture}
+\end{codeexample}
+\end{stylekey}
+
 \begin{stylekey}{every orm line}
   This style is envoked by all styles of this package that draw lines. By default it sets the line width to 0.3mm.
 \end{stylekey}
@@ -888,9 +920,11 @@ Puts some text as \cmd{ormc} in braces in constraint color.
 
 \begin{description}
   \item[\ormVersion, \ormDate]
-    Unstable developer version (at Github)
-  \item[0.1, January 25th, 2010]
-    First release (at CTAN)
+    Unstable developer version (at Github).
+  \item[0.1.4, January 15, 2016]
+    Power types, sequence types, \texttt{orm-compact} added. Default style of objects changed from rounded rectangle to circle.
+  \item[0.1, January 25, 2010]
+    First release (at CTAN).
 \end{description}
 
 \ifappendix
