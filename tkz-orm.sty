@@ -987,28 +987,6 @@
 }
 
 
-% Power types
-\tikzset{power/.style args={#1}{
-        append after command={
-            \pgfextra{
-                \node[entity,shape=rectangle,rounded corners,fit={(\tikzlastnode)},label={[font=\orm@font]#1}] at (\tikzlastnode) (\tikzlastnode-power) {};
-            }
-        }
-    }
-}
-
-
-% Sequence types
-\tikzset{sequence/.style args={#1}{
-        append after command={
-            \pgfextra{
-                \node[entity,shape=rectangle,rounded corners=0pt,fit={(\tikzlastnode)},label={[font=\orm@font]#1}] at (\tikzlastnode) (\tikzlastnode-sequence) {};
-            }
-        }
-    }
-}
-
-
 \tikzset{
   unique/.code={\orm@parse@xunique#1:\pgf@nil},
   unique/.default=1,
@@ -1044,7 +1022,10 @@
     \bgroup%
      [current point is local=true]
      let \p1 = (\tikzlastnode.west), \p2 = (\tikzlastnode.east)
-     in \pgfextra{\pgfmathparse{(\x2-\x1)/4mm}}
+     in \pgfextra{%
+        \pgfgettransformentries{\mya}{\myb}{\myc}{\myd}{\sx}{\sy}%
+        \pgfmathparse{(\x2-\x1)/(4mm/\mya)}%
+     }%
      (\tikzlastnode) node[
         /orm/uniqueness bar from/.expand once=#1,
         /orm/uniqueness bar to/.expand once=#2,
@@ -1116,6 +1097,29 @@
 
 % TODO: add optional parameters and document this
 \tikzstyle{preferred unique}=[unique=1:1,unique=1:2]
+
+
+% Power types
+\tikzset{power/.style args={#1}{
+    append after command={
+      \pgfextra{
+        \node[entity,shape=rectangle,rounded corners,fit={(\tikzlastnode)},label={[font=\orm@font]#1}] at (\tikzlastnode) (\tikzlastnode-power) {};
+      }
+    }
+  }
+}
+
+
+% Sequence types
+\tikzset{sequence/.style args={#1}{
+    append after command={
+      \pgfextra{
+        \node[entity,shape=rectangle,sharp corners,fit={(\tikzlastnode)},label={[font=\orm@font]#1}] at (\tikzlastnode) (\tikzlastnode-sequence) {};
+      }
+    }
+  }
+}
+
 
 \makeatother
 
