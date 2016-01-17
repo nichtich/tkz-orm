@@ -13,7 +13,7 @@
 \usepackage{makeidx}
 \makeindex
 
-\def\ormVersion{0.1.4}
+\def\ormVersion{0.1.4-dev}
 \def\ormDate{January 15, 2016}
 \newif\ifappendix
 \appendixfalse
@@ -50,7 +50,7 @@ Object-Role Modeling (ORM)\footnote{See \url{http://www.orm.net/}.} is a fact-or
 
 \begin{figure}[ht]
   \centering
-  \begin{tikzpicture}
+  \begin{tikzpicture}[orm]
     \entity (A) at (0,0) {A};
     \entity[right=of A] (blank) {};
     \value[right=of blank] (value) {Value type};
@@ -70,7 +70,7 @@ Object types are drawn as rectangles with rounded borders. The object's type nam
 \begin{stylekey}{entity}
 This style is to be used with nodes that represent entity types.
 \begin{codeexample}[]
-\begin{tikzpicture}
+\begin{tikzpicture}[orm]
   \node[entity] at (0,0) {Foo};
   \node[entity] (unnamed) at (1.2,0) {};
   \node[entity] at (2.5,0) {Person\\(.name)};
@@ -81,7 +81,7 @@ This style is to be used with nodes that represent entity types.
 \begin{stylekey}{value}
 This style is to be used with nodes that represent value types.
 \begin{codeexample}[]
-\begin{tikzpicture}
+\begin{tikzpicture}[orm]
   \node[value] {Name};
 \end{tikzpicture}
 \end{codeexample}
@@ -90,7 +90,7 @@ This style is to be used with nodes that represent value types.
 \begin{stylekey}{power}
 This style is to be used with nodes that represent power types.
 \begin{codeexample}[]
-\begin{tikzpicture}
+\begin{tikzpicture}[orm]
   \node[entity,power=below:As] {A};
   \node[entity,power=Bs] at (1.1,0) {B};
   \node[entity,power] at (2.2,0) {C};
@@ -101,7 +101,7 @@ This style is to be used with nodes that represent power types.
 \begin{stylekey}{sequence}
 This style is to be used with nodes that represent sequence types.
 \begin{codeexample}[]
-\begin{tikzpicture}
+\begin{tikzpicture}[orm]
   \node[entity,sequence=below:As] {A};
   \node[entity,sequence=Bs] at (1.1,0) {B};
   \node[entity,sequence] at (2.2,0) {C};
@@ -113,7 +113,7 @@ This style is to be used with nodes that represent sequence types.
 \stylekeyheadline[]{every value}
 Each of this styles is envoked by the styles \sty{entity} or \sty{value}. Change one of this styles to change the appearance of entity or value types.
 \begin{codeexample}[width=3cm]
-\begin{tikzpicture}[
+\begin{tikzpicture}[orm,
   every entity/.style={draw=blue!50,fill=blue!20},
   every value/.style={draw=green!50,fill=green!20}]
   \node[entity] (P) at (0,0) {Person};
@@ -125,7 +125,7 @@ Each of this styles is envoked by the styles \sty{entity} or \sty{value}. Change
 \begin{stylekey}{every object}
   This style is envoked by the styles \sty{entity} and \sty{value}. Change this style to change the common appearance of entity and value types.
 \begin{codeexample}[width=3cm]
-\begin{tikzpicture}[
+\begin{tikzpicture}[orm,
   every object/.style={shape=rectangle,draw=red}]
   \node[entity] (P) at (0,0) {Person};
   \node[value]  (N) at (1.5,0) {Name};
@@ -177,7 +177,7 @@ Shapes the current node as predicate rotated by 90 degree (vertical).
 % Alternatively of using this style you can enable the general style \sty{orm}
 % (see section~\ref{sec:generalstyles}) and just draw a normal line.
 \begin{codeexample}[width=3cm]
-\begin{tikzpicture}
+\begin{tikzpicture}[orm]
   \node[entity,power] (A) {A};
   \node[roles] (r) at (1,0) {};
   \draw[relation] (A-power) -- (r);
@@ -200,7 +200,7 @@ The following table lists abbreviations that can be used for creating predicate 
   \colorbox{graphicbackground}{\tikz \ternary{};} \\
 \commandentry{vunary} or \commandentry{vrole} & |\node[vrole]| &
  \multirow{3}{2cm}{\colorbox{graphicbackground}{
-   \begin{tikzpicture}
+   \begin{tikzpicture}[orm]
     \vunary at (0,0){} ;
     \vbinary at (0.6,-0.2){};
     \vternary at (1.2,-0.4){};
@@ -218,7 +218,7 @@ The following table lists abbreviations that can be used for creating predicate 
 \begin{stylekey}{every predicate}
 Changing this style to modify the common appearance of predicates.
 \begin{codeexample}[width=3cm]
-\begin{tikzpicture}[
+\begin{tikzpicture}[orm,
   every predicate/.style={draw=blue,fill=green!20}]
   \entity at (2,0) (B) {B};
   \entity (A) {A} edge[relation] node[roles]{} (B);
@@ -247,7 +247,7 @@ Predicates are drawn either horizontally (\sty{roles}) or vertically (\sty{vrole
 \centering
 \begin{codeexample}[width=10cm]
 \Large
-\begin{tikzpicture}
+\begin{tikzpicture}[orm]
   \node[roles=3,shape example,inner ysep=0.75cm] (s) {};
   \foreach \anchor/\placement in
     {one north/below, one south/above,
@@ -312,7 +312,7 @@ This style is to be used with role names. Role names can be displayed in square 
 \begin{stylekey}[\meta{n}\opt{\texttt{:}\meta{index}}]{index}
 Adds a role index as small label at the $n$th role box (default: $n$).
 \begin{codeexample}[]
-\begin{tikzpicture}
+\begin{tikzpicture}[orm]
 \binary[index=1,index=2:X] {};
 \vroles[index=A.1,index=2:A.2] at (.8,0) {};
 \end{tikzpicture}
@@ -337,7 +337,7 @@ By default every row in a fact table is unique. To express additional uniqueness
 \begin{stylekey}[\opt{\meta{from}\texttt{-}\meta{to}\texttt{:}\meta{level}}]{unique}
 Draws a uniqueness constraint bar above one or more roles. All parts of the key value are optional. As default a simple uniqueness bar above (\meta{level}|=1|) the first role (\meta{from}|=1|) is drawn. To make a bar span multiple roles, use the \meta{from}|-|\meta{to} syntax. Negative levels drawn the bar below the roles.
 \begin{codeexample}[]
-\begin{tikzpicture}
+\begin{tikzpicture}[orm]
 \binary[unique] at (0,0) {};
 \binary[unique=2] at (1.2,0) {};
 \ternary[unique=2-3:-1] at (0.2,-0.6) {};
@@ -351,7 +351,7 @@ Draws a dotted uniqueness constraint bar. The syntax is the same as at the \sty{
 The bar includes background color in the gaps between dots, so it can be drawn on top of 
 another bar.
 \begin{codeexample}[]
-\begin{tikzpicture}
+\begin{tikzpicture}[orm]
 \ternary[unique=1-3,skip unique=2] {};
 \end{tikzpicture}
 \end{codeexample}
@@ -409,7 +409,7 @@ Draws the current node as mandatory role dot.
 \stylekeyheadline[]{required}
 This styles enables the \sty{relationship} style and adds a mandatory role dot at the start of a straight line.
 \begin{codeexample}[]
-\begin{tikzpicture}
+\begin{tikzpicture}[orm]
   \entity (A) {A};
   \entity at (2,0) {B} edge[mandatory]
           node[roles] (p) {} (A);
@@ -420,7 +420,7 @@ This styles enables the \sty{relationship} style and adds a mandatory role dot a
 \begin{stylekey}{required by}
 This styles enables the \sty{relationship} style and adds a mandatory role dot at the end of a straight line.
 \begin{codeexample}[]
-\begin{tikzpicture}
+\begin{tikzpicture}[orm]
   \entity (A) {A};
   \entity at (2,0) {B} edge[required by]
           node[roles] (p) {} (A);
@@ -432,7 +432,7 @@ This styles enables the \sty{relationship} style and adds a mandatory role dot a
 \stylekeyheadline[]{both mandatory}
 This styles enables the \sty{relationship} style and adds mandatory role dots at both ends of a straight line.
 \begin{codeexample}[]
-\begin{tikzpicture}
+\begin{tikzpicture}[orm]
   \entity (A) {A};
   \entity at (2,0) {B} edge[both required]
           node[roles] (p) {} (A);
@@ -486,7 +486,7 @@ External constraints span multiple roles that may come from different predicates
 \begin{stylekey}{limits} % TODO: add optional parameter
   This style is to be used with lines that connect constraint circles and roles. It can also be used to link other kinds of constraints (for instance value constraints) to the entity, value, or role they belong to.
 \begin{codeexample}[width=3cm]
-\begin{tikzpicture}
+\begin{tikzpicture}[orm]
   \unary (r1) at (0,0) {};
   \unary (r2) at (0,-1.4) {};
   \draw[limits] (r1) to node[constraint=x] {} (r2);
@@ -581,7 +581,7 @@ Value constraints, cardinality constraints, and occurrence frequencies can simpl
 \noindent\textbf{Frequency Constraints} specify the number of times an object can play a role. Usually it is connected to the roles with a limtation line. % TODO: better syntax as pin
 
 \begin{codeexample}[width=3cm]
-\begin{tikzpicture}
+\begin{tikzpicture}[orm]
 \binary[index=1:1] (b) {};
 \limits (b.one south) -- +(0,-.4) node[constraint]{f};
 \end{tikzpicture}
@@ -591,7 +591,7 @@ Value constraints, cardinality constraints, and occurrence frequencies can simpl
 \index{value constraints}\index{constraints!values}
 
 \begin{codeexample}[]
-\begin{tikzpicture}
+\begin{tikzpicture}[orm]
 \entity (A) {A};
 \node[constraint,anchor=north west,inner ysep=0] 
       at (A.north east) {\ormbraces{a, b, c}};
@@ -634,7 +634,7 @@ Constraints not expressed by predefined graphical notation may be specified as t
 \begin{stylekey}[\opt{\meta{mark}}]{rule}
 This key is to be used with nodes that contain textual rules. The optional \meta{mark} is shown as footnotes index left to the rule.
 \begin{codeexample}[]
-\begin{tikzpicture}
+\begin{tikzpicture}[orm]
 \node[rule=1] {{\ormbf Each} Number identifies {\ormbf at most one} Room.};
 \end{tikzpicture}
 \end{codeexample}
@@ -647,7 +647,7 @@ Matrices are useful to draw multiple textual rules below each other.
 \begin{figure}[h]
 \centering
 \begin{codeexample}[]
-\begin{tikzpicture}
+\begin{tikzpicture}[orm]
   \entity (E) {Employee\ormind{1}\\(.nr)};
   \binary[left=of E.north west,unique=2,label=\ormleft{has}] (h) {};
   \binary[left=of E.south west,unique=1-2,
@@ -691,7 +691,7 @@ Draws a subtype relationship arrow from the supertype to the subtype.
 \begin{figure}[h]
 \centering
 \begin{codeexample}[]
-\begin{tikzpicture}[
+\begin{tikzpicture}[orm,
   edge from parent/.style=subtype]
   \node[entity] {Animal}
     child {node[entity] {Mammal}}
@@ -707,7 +707,7 @@ Draws a subtype relationship arrow from the supertype to the subtype.
 \begin{stylekey}{suptype}
 Works in the same way as \sty{subtype} but with reverse direction.
 \begin{codeexample}[]
-\begin{tikzpicture}
+\begin{tikzpicture}[orm]
   \node[entity] (A) {Animal};
   \node[entity] (S) [right=6mm of A] {Sheep};
   \draw[suptype] (S) to (A);
@@ -723,7 +723,7 @@ with a dashed arrow (\sty{subinterface} or \sty{supinterface}).
 \stylekeyheadline[]{supinterface}
 Draw secondary subtype/supertype relationship arrows. 
 \begin{codeexample}[]
-\begin{tikzpicture}
+\begin{tikzpicture}[orm]
   \node[entity] (A) {Animal};
   \node[entity] (P) [right=8mm of A] {Person};
   \draw[supinterface] (P) to (A);
@@ -780,7 +780,7 @@ This style modifies the styles \sty{every object} and \sty{every predicate} so a
 \begin{figure}[h]
 \centering
 \begin{codeexample}[]
-\begin{tikzpicture}
+\begin{tikzpicture}[orm]
   \matrix[column sep=4mm] {
     \entity (A) {A}; & \binary (ab) {}; & \entity (B) {B}; &
     \binary (bc) {}; & \entity (C) {C}; \\ };
@@ -801,7 +801,7 @@ This style modifies the styles \sty{every object} and \sty{every predicate} so a
 This styles work like \sty{duplicated model} and \sty{implied model} but only affect the current element.
 The style are currently broken.
 \begin{codeexample}[]
-\begin{tikzpicture}
+\begin{tikzpicture}[orm]
 \entity[duplicated] (P) {Person};
 \value[implied,right=1.6 of P] (V) {PersonName};
 \draw[implied,both required] (P) to 
@@ -814,7 +814,7 @@ The style are currently broken.
 \begin{stylekey}{zoomed}
 This styles visualizes an object type as {\emph zoomed} by using a thicker line.
 \begin{codeexample}[]
-\begin{tikzpicture}
+\begin{tikzpicture}[orm]
 \entity at (0,0) {Normal};
 \entity[zoomed] at (2,0) {Zoomed};
 \end{tikzpicture}
@@ -919,8 +919,13 @@ Puts some text as \cmd{ormc} in braces in constraint color.
 \section*{Changes}
 
 \begin{description}
-  \item[\ormVersion, \ormDate]
-    Unstable developer version (at Github).
+  \makeatletter
+  \def\zz{\in@{-dev}}\expandafter\zz\expandafter{\ormVersion}%
+  \ifin@%
+    \item[\ormVersion, \ormDate]
+      Unstable developer version (at Github).
+  \fi
+  \makeatother
   \item[0.1.4, January 15, 2016]
     Power types, sequence types, \texttt{orm-spacious} added.
   \item[0.1, January 25, 2010]
