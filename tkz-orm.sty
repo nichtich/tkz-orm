@@ -986,9 +986,11 @@
  }
 }
 
+\def\orm@none{none}
 
 \tikzset{
-  unique/.code={\orm@parse@xunique#1:\pgf@nil},
+  unique/.code={\ifx#1\orm@none\else%
+      \orm@parse@xunique#1:\pgf@nil\fi},
   unique/.default=1,
 }
 
@@ -1045,7 +1047,8 @@
 % TODO: remove this duplicated code. 
 
 \tikzset{
-  skip unique/.code={\orm@parse@sunique#1:\pgf@nil},
+  skip unique/.code={\ifx#1\orm@none\else%
+      \orm@parse@sunique#1:\pgf@nil\fi},
   skip unique/.default=1,
 }
 

@@ -335,7 +335,7 @@ By default every row in a fact table is unique. To express additional uniqueness
 % TODO: add preferred unique (double line)
 
 \begin{stylekey}[\opt{\meta{from}\texttt{-}\meta{to}\texttt{:}\meta{level}}]{unique}
-Draws a uniqueness constraint bar above one or more roles. All parts of the key value are optional. As default a simple uniqueness bar above (\meta{level}|=1|) the first role (\meta{from}|=1|) is drawn. To make a bar span multiple roles, use the \meta{from}|-|\meta{to} syntax. Negative levels drawn the bar below the roles.
+Draws a uniqueness constraint bar above one or more roles. All parts of the key value are optional. The special value |none| draws no bar. As default a simple uniqueness bar above (\meta{level}|=1|) the first role (\meta{from}|=1|) is drawn. To make a bar span multiple roles, use the \meta{from}|-|\meta{to} syntax. Negative levels drawn the bar below the roles.
 \begin{codeexample}[]
 \begin{tikzpicture}[orm]
 \binary[unique] at (0,0) {};
