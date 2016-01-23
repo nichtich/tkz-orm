@@ -1101,6 +1101,15 @@
 % TODO: add optional parameters and document this
 \tikzstyle{preferred unique}=[unique=1:1,unique=1:2]
 
+% Aliases for uniqueness constraints on binary predicates
+\tikzstyle{one-to-many}=[unique=2:1]
+\tikzstyle{many-to-one}=[unique=1:1]
+\tikzstyle{one-to-one}=[unique=1:1,unique=2:1]
+\tikzstyle{many-to-many}=[unique=1-2:1]
+\tikzstyle{1:n}=[unique=2:1]
+\tikzstyle{n:1}=[unique=1:1]
+\tikzstyle{1:1}=[unique=1:1,unique=2:1]
+\tikzstyle{n:m}=[unique=1-2:1]
 
 % Power types
 \tikzset{power/.style args={#1}{

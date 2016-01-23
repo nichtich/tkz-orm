@@ -3,6 +3,11 @@
 \usepackage{tkz-orm}
 \usepackage{pgfmanualstyle}
 
+\newcommand{\keyentry}[1]{%
+  \expandafter\hyperref[sty:#1]{\texttt{\color{darkred}#1}}%
+  \index{#1@\texttt{#1} key}%
+}
+
 \usetikzlibrary{fit} % fitting library
 \usetikzlibrary{positioning} % for left/right=of ...
 
@@ -369,7 +374,31 @@ This styles can be used to draw a line in the same style as a uniqueness constra
 \end{stylekey}
 
 \noindent
-Please note that elementary $n$-ary predicates should only have uniqueness constraints of at least $n-1$ roles. Picture~\ref{fig:splitternary} shows how to split a ternary predicate with unique constraint bar on one role.
+The following aliases exist for uniqueness constraints on binary predicates:
+
+\begin{table}[ht]
+\begin{tabular}{lll}
+\textbf{key(s)} & \textbf{abbreviation for} & \\
+  \keyentry{1:n} or \keyentry{one-to-many} &
+  |\node[unique=1]| &
+  \colorbox{graphicbackground}{\tikz \binary[1:n]{};} \\
+  \keyentry{n:1} or \keyentry{many-to-one} &
+  |\node[unique=2]| &
+  \colorbox{graphicbackground}{\tikz \binary[n:1]{};} \\
+  \keyentry{1:1} or \keyentry{one-to-one} &
+  |\node[unique=1,unique=2]| &
+  \colorbox{graphicbackground}{\tikz \binary[1:1]{};} \\
+  \keyentry{n:m} or \keyentry{many-to-many} &
+  |\node[unique=1-2]| &
+  \colorbox{graphicbackground}{\tikz \binary[n:m]{};} \\
+\end{tabular}
+\end{table}
+
+\noindent
+An implicit uniqueness constraint spanning the whole predicate can be assumed
+and $n$-ary predicates should only have uniqueness constraints of at least
+$n-1$ roles. Picture~\ref{fig:splitternary} shows how to split a ternary
+predicate with unique constraint bar on one role.
 
 \begin{figure}[h]
 \centering
